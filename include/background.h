@@ -6,5 +6,5 @@ class Background {
     void Draw() const;
 
   private:
-
+    void UploadImage();
 };

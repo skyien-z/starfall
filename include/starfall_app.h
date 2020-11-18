@@ -7,8 +7,7 @@
 namespace starfall {
 
 /**
- * Cinder app displaying simulation of elastic
- * collisions.
+ * Cinder app displaying simulation of shooting stars.
  */
 class StarfallApp : public ci::app::App {
  public:

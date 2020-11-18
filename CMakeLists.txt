@@ -51,7 +51,10 @@ get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
 list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
-                            src/starfall_app.cc)
+                            src/starfall_app.cc
+                            src/shooting_star.cpp
+                            src/canvas.cpp
+                            src/background.cpp)
 
 list(APPEND TEST_FILES tests/shooting_star_test.cpp)
 

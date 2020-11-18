@@ -7,4 +7,5 @@ class Background {
 
   private:
     void UploadImage();
+
 };

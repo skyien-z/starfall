@@ -2,7 +2,7 @@
 
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
-#include "cinder/gl/gl.h"
+#include "canvas.h"
 
 namespace starfall {
 
@@ -18,7 +18,9 @@ class StarfallApp : public ci::app::App {
   void update() override;
   void keyDown(ci::app::KeyEvent event) override;
 
-  static constexpr double kWindowSize = 800;
+  Canvas canvas_;
+
+  static constexpr double kWindowSize = 700;
   static constexpr double kMargin = 50;
 
  private:

@@ -1,6 +1,6 @@
 #include <starfall_app.h>
 
-using ideal_gas::StarfallApp;
+using starfall::StarfallApp;
 
 void prepareSettings(StarfallApp::Settings* settings) {
   settings->setResizable(false);

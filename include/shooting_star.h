@@ -3,7 +3,8 @@
 
 class ShootingStar {
   public:
-    ShootingStar(ci::Color color, glm::vec2 starting_position);
+    ShootingStar(glm::vec2 starting_position, ci::Color color,
+                 float trajectory_angle, float star_head_radius);
 
     /**
      * Renders shooting star and its tail
@@ -11,23 +12,28 @@ class ShootingStar {
     void Draw() const;
 
     /**
-     * Updates star's position.
+     * Updates star's position using y = m x + b where
+     * m = tan(y) where y is in radians.
      */
     void UpdatePosition();
 
   private:
+    static constexpr size_t kMoveByXPixels = 1;
+
     // variables that change with timer
     glm::vec2 position_;
-    glm::vec2 velocity_;
 
     // variables that are never changed once
     // star is initialized
     ci::Color color_;
-    double trajectory_angle_;
-    size_t star_head_radius_;
+    float trajectory_angle_;
+    float star_head_radius_;
+    ci::Color darker_color_;
 
     // variables that depend on other variables
     // for initialization
-    size_t star_hue_radius_;
-    size_t tail_length_;
+    float star_hue_radius_;
+    float tail_length_;
+
+    void DrawTail() const;
 };

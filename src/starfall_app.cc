@@ -11,12 +11,15 @@ StarfallApp::StarfallApp(): canvas_(glm::vec2(kMargin, kMargin),
 void StarfallApp::draw() {
     ci::Color8u background_color(0, 0, 0);
     ci::gl::clear(background_color);
+
+    canvas_.Draw();
 }
 
 void StarfallApp::setup() {
 }
 
 void StarfallApp::update() {
+    canvas_.Update();
 }
 
 void StarfallApp::keyDown(ci::app::KeyEvent event) {

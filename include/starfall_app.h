@@ -1,4 +1,5 @@
 #pragma once
+#include "canvas.h"
 
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
@@ -18,12 +19,11 @@ class StarfallApp : public ci::app::App {
   void update() override;
   void keyDown(ci::app::KeyEvent event) override;
 
-  Canvas canvas_;
-
   static constexpr double kWindowSize = 700;
   static constexpr double kMargin = 50;
 
  private:
+    Canvas canvas_;
 };
 
 }  // namespace ideal_gas

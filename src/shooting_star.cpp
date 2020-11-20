@@ -3,7 +3,7 @@
 ShootingStar::ShootingStar(glm::vec2 starting_position, ci::Color color,
 float trajectory_angle, float star_head_radius) : position_(starting_position), color_(color),
 trajectory_angle_(trajectory_angle), star_head_radius_(star_head_radius) {
-    star_hue_radius_ = star_head_radius_ * 1.25;
+    star_hue_radius_ = star_head_radius_ * 3;
     tail_length_ = star_head_radius_ * 2;
 
     // gets a darker version of current color

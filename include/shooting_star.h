@@ -1,6 +1,7 @@
 #pragma once
 #include "cinder/gl/gl.h"
 
+namespace starfall {
 class ShootingStar {
   public:
     ShootingStar(glm::vec2 starting_position, ci::Color color,
@@ -37,3 +38,4 @@ class ShootingStar {
 
     void DrawTail() const;
 };
+}

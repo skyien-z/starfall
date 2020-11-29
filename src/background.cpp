@@ -1,5 +1,12 @@
-//
-// Created by Kylie on 11/17/20.
-//
-
 #include "background.h"
+
+namespace starfall {
+    Background::Background() {
+
+    }
+
+    void Background::UploadImage() {
+
+    }
+
+}

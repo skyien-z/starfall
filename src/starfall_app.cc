@@ -7,12 +7,10 @@ StarfallApp::StarfallApp(): canvas_(glm::vec2(kMargin, kMargin),
 }
 
 void StarfallApp::draw() {
-
-
 //  ci::gl::clear();
     ci::gl::draw(background_image_);
 
-    //canvas_.Draw();
+    canvas_.Draw();
 }
 
 void StarfallApp::setup() {

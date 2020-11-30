@@ -6,7 +6,7 @@ namespace starfall {
                                 color_(color),
                                 trajectory_angle_(trajectory_angle),
                                 star_head_radius_(star_head_radius) {
-        star_hue_radius_ = star_head_radius_ * 1.5;
+        star_hue_radius_ = star_head_radius_ * 2;
         tail_length_ = star_head_radius_ * 2;
 
         // gets a darker version of current color
@@ -22,15 +22,16 @@ namespace starfall {
     }
 
     void ShootingStar::Draw() const {
-        // draws outer "shadow" of star head
-        ci::gl::ScopedColor(0, 0, 10);
+        // draws outer "shadow" of star head*/
+        ci::gl::ScopedColor scpColor(color_);
         ci::gl::drawSolidCircle(position_, star_hue_radius_);
 
         // draws star tail
         DrawTail();
 
-        // draws star head
-        ci::gl::color(ci::Color((color_)));
+        // draws white star head
+        ci::gl::color(ci::ColorA( 255, 255, 255));
+
         ci::gl::drawSolidCircle(position_, star_head_radius_);
     }
 

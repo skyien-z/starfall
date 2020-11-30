@@ -4,21 +4,22 @@ namespace starfall {
 
 StarfallApp::StarfallApp(): canvas_(glm::vec2(kMargin, kMargin),
               kWindowSize, kMargin) {
-        ci::app::setWindowSize((int) kWindowSize + kMargin,
-                               (int) kWindowSize - kMargin);
 }
 
 void StarfallApp::draw() {
-    ci::Color8u background_color(0, 0, 0);
-    ci::gl::clear(background_color);
 
-    ci::gl::draw( texture );
 
-    canvas_.Draw();}
+//  ci::gl::clear();
+    ci::gl::draw(background_image_);
+
+    //canvas_.Draw();
+}
 
 void StarfallApp::setup() {
-    texture = ci::gl::Texture2d::
-            create(ci::loadImage( "images/mountains_for_starfall.png" ));
+    auto image = ci::loadImage( "/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
+                                "final-project-skyien-z/images/smaller_mountains.png" );
+    background_image_ = ci::gl::Texture2d::create(image);
+    setWindowSize(background_image_->getWidth(), background_image_->getHeight() );
 }
 
 void StarfallApp::update() {

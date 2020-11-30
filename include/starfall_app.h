@@ -24,6 +24,7 @@ class StarfallApp : public ci::app::App {
 
  private:
     Canvas canvas_;
+    ci::gl::Texture2dRef texture;
 };
 
 }  // namespace ideal_gas

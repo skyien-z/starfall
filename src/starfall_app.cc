@@ -12,10 +12,13 @@ void StarfallApp::draw() {
     ci::Color8u background_color(0, 0, 0);
     ci::gl::clear(background_color);
 
-    canvas_.Draw();
-}
+    ci::gl::draw( texture );
+
+    canvas_.Draw();}
 
 void StarfallApp::setup() {
+    texture = ci::gl::Texture2d::
+            create(ci::loadImage( "images/mountains_for_starfall.png" ));
 }
 
 void StarfallApp::update() {

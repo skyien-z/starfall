@@ -15,9 +15,7 @@ void ShootingStar::Update() {
         past_positions_.push_back(glm::vec2(position_.x, position_.y));
     }
 
-    // Changes current position according to y = m x + b; m = tan(y) where y is in radians
-    position_.x = kMoveByXPixels + position_.x;
-    position_.y = std::tan(trajectory_angle_) * kMoveByXPixels + position_.y;
+    UpdatePosition();
 
     // Adds current position to past_positions_ if current position is at least
     // radius/2 away from last star in past_positions
@@ -57,14 +55,18 @@ bool ShootingStar::DoesStarTouchPoint(glm::vec2 &point_on_graph) {
     return length(position_ - point_on_graph) <= star_head_radius_;
 }
 
-const glm::vec2 &ShootingStar::GetPosition() const {
-    return position_;
-}
-
 void ShootingStar::RemoveFirstStar() {
     past_positions_.erase(past_positions_.begin());
 }
 
+void ShootingStar::UpdatePosition() {
+    position_.x = kMoveByXPixels + position_.x;
+    position_.y = std::tan(trajectory_angle_) * kMoveByXPixels + position_.y;
+}
+
+const glm::vec2 &ShootingStar::GetPosition() const {
+    return position_;
+}
 
 }
 

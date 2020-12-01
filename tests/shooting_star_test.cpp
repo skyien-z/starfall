@@ -26,3 +26,21 @@ TEST_CASE("Does Star Touch Point") {
         REQUIRE(star.DoesStarTouchPoint(test_position));
     }
 }
+
+TEST_CASE("Update Star Position") {
+    SECTION("Negative Slope") {
+        // radius of all stars is 2
+        ShootingStar star(glm::vec2(50, 50),
+                          ci::Color(0, 255, 0), M_PI / 4);
+        star.Update();
+        REQUIRE(star.GetPosition() == glm::vec2(51, 51));
+    }
+
+    SECTION("Positive Slope") {
+        // radius of all stars is 2
+        ShootingStar star(glm::vec2(50, 50),
+                          ci::Color(0, 255, 0), -5 * M_PI / 4);
+        star.Update();
+        REQUIRE(star.GetPosition() == glm::vec2(51, 49));
+    }
+}

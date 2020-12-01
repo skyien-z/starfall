@@ -62,5 +62,10 @@ class ShootingStar: public Graphic {
      * @param is_head_star; true if star to be rendered is the "head" star
      */
     void DrawStar(glm::vec2 star_position, bool is_head_star) const;
+
+    /**
+     * Changes current position according to y = m x + b; m = tan(y) where y is in radians
+     */
+    void UpdatePosition();
 };
 }

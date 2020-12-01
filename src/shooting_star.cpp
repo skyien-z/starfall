@@ -54,7 +54,7 @@ void ShootingStar::DrawStar(glm::vec2 star_position, bool is_head_star) const {
 }
 
 bool ShootingStar::DoesStarTouchPoint(glm::vec2 &point_on_graph) {
-    return length(position_ - point_on_graph) == star_head_radius_;
+    return length(position_ - point_on_graph) <= star_head_radius_;
 }
 
 const glm::vec2 &ShootingStar::GetPosition() const {

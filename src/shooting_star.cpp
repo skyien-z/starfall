@@ -7,9 +7,7 @@ float trajectory_angle, float star_head_radius) : position_(starting_position),
                             color_(color),
                             trajectory_angle_(trajectory_angle),
                             star_head_radius_(star_head_radius) {
-    star_hue_radius_ = star_head_radius_ * 2;
-    tail_length_ = star_head_radius_ * 2;
-
+    timer.start();
     // gets a darker version of current color
     glm::vec3 darker_hue = static_cast<float>(0.25) * color_.get(ci::CM_RGB);
 
@@ -17,7 +15,7 @@ float trajectory_angle, float star_head_radius) : position_(starting_position),
 }
 
 void ShootingStar::Update() {
-    // Adds current position to past_positions_
+    // Adds first position to past_positions_
     if (past_positions_.empty()) {
         past_positions_.push_back(glm::vec2(position_.x, position_.y));
     }
@@ -26,8 +24,14 @@ void ShootingStar::Update() {
     position_.x = kMoveByXPixels + position_.x;
     position_.y = std::tan(trajectory_angle_) * kMoveByXPixels + position_.y;
 
-    if (abs(position_.x - past_positions_.back().x) >= star_hue_radius_/2) {
+    // Adds current position to past_positions_ if current position is at least
+    // radius/2 away from last star in past_positions
+    if (abs(position_.x - past_positions_.back().x) >= star_head_radius_/2) {
         past_positions_.push_back(glm::vec2(position_.x, position_.y));
+    }
+
+    if (static_cast<int>(timer.getSeconds()) % 2 == 0) {
+        past_positions_.pop_back();
     }
 }
 
@@ -48,12 +52,12 @@ void ShootingStar::DrawStarTail() const {
 void ShootingStar::DrawStar(glm::vec2 star_position, bool is_head_star) const {
     // draws tail star
     ci::gl::ScopedColor scpColor(color_);
-    ci::gl::drawSolidCircle(star_position, star_hue_radius_);
+    ci::gl::drawSolidCircle(star_position, star_head_radius_);
 
     // draws white star head
     if (is_head_star) {
         ci::gl::color(ci::ColorA( 255, 255, 255));
-        ci::gl::drawSolidCircle(star_position, star_hue_radius_);
+        ci::gl::drawSolidCircle(star_position, star_head_radius_);
     }
 }
 

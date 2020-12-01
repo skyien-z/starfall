@@ -11,7 +11,7 @@ class Canvas: public Graphic {
 
     void Update();
 
-  private:
+private:
     std::vector<ShootingStar> star_list_;
 };
 }

@@ -1,4 +1,6 @@
 #pragma once
+
+#include <cinder/Timer.h>
 #include "cinder/gl/gl.h"
 #include "graphic.h"
 
@@ -19,7 +21,7 @@ class ShootingStar: public Graphic {
      */
     void Update();
 
-  private:
+ private:
     static constexpr size_t kMoveByXPixels = 1;
 
     // variables that change with timer
@@ -32,11 +34,7 @@ class ShootingStar: public Graphic {
     float star_head_radius_;
     ci::Color darker_color_;
 
-    // variables that depend on other variables
-    // for initialization
-    float star_hue_radius_;
-    float tail_length_;
-
+    ci::Timer timer;
     // used to draw tail of shooting star
     std::vector<glm::vec2> past_positions_;
 

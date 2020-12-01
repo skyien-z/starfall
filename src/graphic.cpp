@@ -1,10 +1,5 @@
 #include "graphic.h"
 
 namespace starfall {
-
-
-void Graphic::UploadImage() {
-
-}
-
+    Graphic::~Graphic() {};
 }

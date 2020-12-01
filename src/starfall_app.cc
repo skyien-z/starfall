@@ -24,6 +24,12 @@ void StarfallApp::update() {
     canvas_.Update();
 }
 
+void StarfallApp::mouseDrag(ci::app::MouseEvent event) {
+    if (event.isShiftDown()) {
+        canvas_.AddPointToBoundaries(event.getPos());
+    }
+}
+
 void StarfallApp::keyDown(ci::app::KeyEvent event) {
   switch (event.getCode()) {
   case ci::app::KeyEvent::KEY_DOWN:
@@ -31,12 +37,6 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
   case ci::app::KeyEvent::KEY_UP:
       break;
   case ci::app::KeyEvent::KEY_TAB:
-      break;
-    case ci::app::KeyEvent::KEY_1:
-        break;
-  case ci::app::KeyEvent::KEY_2:
-      break;
-  case ci::app::KeyEvent::KEY_3:
       break;
     case ci::app::KeyEvent::KEY_DELETE:
       break;

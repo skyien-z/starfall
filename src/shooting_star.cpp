@@ -25,7 +25,7 @@ void ShootingStar::Update() {
 
     // Keeps the length of the star tail to a constant
     if (past_positions_.size() == tail_length_proportion_) {
-        RemoveFirstStar();
+        past_positions_.erase(past_positions_.begin());
     }
 }
 
@@ -55,7 +55,7 @@ bool ShootingStar::DoesStarTouchPoint(glm::vec2 &point_on_graph) {
     return length(position_ - point_on_graph) <= star_head_radius_;
 }
 
-void ShootingStar::RemoveFirstStar() {
+void ShootingStar::RemoveStarHead() {
     past_positions_.erase(past_positions_.begin());
 }
 
@@ -66,6 +66,14 @@ void ShootingStar::UpdatePosition() {
 
 const glm::vec2 &ShootingStar::GetPosition() const {
     return position_;
+}
+
+bool ShootingStar::GetIsHeadStar() {
+    return is_head_star_;
+}
+
+void ShootingStar::SetIsHeadStar(bool is_head_star) {
+    is_head_star_ = is_head_star;
 }
 
 }

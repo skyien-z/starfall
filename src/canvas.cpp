@@ -21,7 +21,7 @@ void Canvas::Update() {
         star.Update();
 
         if (IsStarAtBoundary(star)) {
-            star.RemoveFirstStar();
+            star.RemoveStarHead();
         }
     }
 }

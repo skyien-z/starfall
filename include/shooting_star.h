@@ -21,6 +21,18 @@ class ShootingStar: public Graphic {
      */
     void Update();
 
+    /**
+     * Checks if star head touches point given
+     *
+     * @param point_on_graph to check for star head contact
+     * @return true if star head touches point; false otherwise
+     */
+    bool DoesStarTouchPoint(glm::vec2& point_on_graph);
+
+    const glm::vec2& GetPosition() const;
+
+    void RemoveFirstStar();
+
  private:
     static constexpr size_t kMoveByXPixels = 1;
     static constexpr float star_head_radius_ = 2;

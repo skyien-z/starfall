@@ -19,11 +19,24 @@ void Canvas::Draw() const {
 void Canvas::Update() {
     for (auto &star: star_list_) {
         star.Update();
+
+        if (isStarAtBoundary(star)) {
+            star.RemoveFirstStar();
+        }
     }
 }
 
 void Canvas::AddPointToBoundaries(const glm::vec2 &boundary_point) {
     boundary_points_.push_back(boundary_point);
+}
+
+bool Canvas::isStarAtBoundary(ShootingStar star) const {
+    for (const glm::vec2& boundary_point: boundary_points_) {
+        if (star.DoesStarTouchPoint(const_cast<glm::vec2 &>(boundary_point))) {
+            return true;
+        }
+    }
+    return false;
 }
 
 }

@@ -3,15 +3,10 @@
 namespace starfall {
 
 ShootingStar::ShootingStar(glm::vec2 starting_position, ci::Color color,
-float trajectory_angle, float star_head_radius) : position_(starting_position),
+float trajectory_angle) : position_(starting_position),
                             color_(color),
-                            trajectory_angle_(trajectory_angle),
-                            star_head_radius_(star_head_radius) {
+                            trajectory_angle_(trajectory_angle) {
     timer.start();
-    // gets a darker version of current color
-    glm::vec3 darker_hue = static_cast<float>(0.25) * color_.get(ci::CM_RGB);
-
-    darker_color_.set(ci::CM_RGB, darker_hue);
 }
 
 void ShootingStar::Update() {
@@ -30,23 +25,20 @@ void ShootingStar::Update() {
         past_positions_.push_back(glm::vec2(position_.x, position_.y));
     }
 
-    if (static_cast<int>(timer.getSeconds()) % 2 == 0) {
-        past_positions_.pop_back();
+    // Keeps the length of the star tail to a constant
+    if (past_positions_.size() == tail_length_proportion_) {
+        past_positions_.erase(past_positions_.begin());
     }
 }
 
 void ShootingStar::Draw() const {
-    DrawStarTail();
-
-    // Draws current star head
-    DrawStar(position_, true);
-}
-
-void ShootingStar::DrawStarTail() const {
-    // Draws "stars" that aggregate into star tail
+    // Draws "stars" that aggregate into colored star tail
     for (const glm::vec2& past_position: past_positions_) {
         DrawStar(past_position, false);
     }
+
+    // Draws current star head
+    DrawStar(position_, true);
 }
 
 void ShootingStar::DrawStar(glm::vec2 star_position, bool is_head_star) const {

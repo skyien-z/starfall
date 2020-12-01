@@ -3,7 +3,7 @@
 namespace starfall {
     Canvas::Canvas(const glm::vec2 &top_left_corner, double canvas_size, double margin) {
         ShootingStar star(glm::vec2(50, 50),
-                          ci::Color(0, 255, 0), M_PI / 4, 2);
+                          ci::Color(0, 255, 0), M_PI / 4);
         star_list_.push_back(star);
     }
 

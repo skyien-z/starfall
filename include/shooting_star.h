@@ -8,10 +8,10 @@ namespace starfall {
 class ShootingStar: public Graphic {
   public:
     ShootingStar(glm::vec2 starting_position, ci::Color color,
-                 float trajectory_angle, float star_head_radius);
+                 float trajectory_angle);
 
     /**
-     * Renders shooting star and its tail
+     * Renders shooting star and its tail.
      */
     void Draw() const;
 
@@ -23,6 +23,11 @@ class ShootingStar: public Graphic {
 
  private:
     static constexpr size_t kMoveByXPixels = 1;
+    static constexpr float star_head_radius_ = 2;
+
+    // Star tail length in pixels is
+    // (star_head_radius_/2) * tail_length_proportion_
+    static constexpr int tail_length_proportion_ = 30;
 
     // variables that change with timer
     glm::vec2 position_;
@@ -31,15 +36,19 @@ class ShootingStar: public Graphic {
     // star is initialized
     ci::Color color_;
     float trajectory_angle_;
-    float star_head_radius_;
-    ci::Color darker_color_;
 
     ci::Timer timer;
-    // used to draw tail of shooting star
+    // past positions of star used to draw tail of shooting star
     std::vector<glm::vec2> past_positions_;
 
-    void DrawStarTail() const;
-
+    /**
+     * Draws single circle representing a star. The head star will be
+     * rendered in white, while the tail will be rendered in the star's
+     * initialized color.
+     *
+     * @param star_position pixel position representing where to draw star.
+     * @param is_head_star; true if star to be rendered is the "head" star
+     */
     void DrawStar(glm::vec2 star_position, bool is_head_star) const;
 };
 }

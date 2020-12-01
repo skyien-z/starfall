@@ -1,10 +1,9 @@
 #pragma once
 #include "cinder/gl/gl.h"
 #include "shooting_star.h"
-#include "background.h"
 
 namespace starfall {
-class Canvas {
+class Canvas: public Graphic {
   public:
     Canvas(const glm::vec2 &top_left_corner, double canvas_size, double margin);
 
@@ -14,6 +13,5 @@ class Canvas {
 
   private:
     std::vector<ShootingStar> star_list_;
-    Background background_;
 };
 }

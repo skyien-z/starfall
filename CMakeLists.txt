@@ -54,7 +54,7 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
                             src/starfall_app.cc
                             src/shooting_star.cpp
                             src/canvas.cpp
-                            src/background.cpp)
+        src/graphic.cpp)
 
 list(APPEND TEST_FILES tests/shooting_star_test.cpp)
 

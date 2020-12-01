@@ -1,8 +1,9 @@
 #pragma once
 #include "cinder/gl/gl.h"
+#include "graphic.h"
 
 namespace starfall {
-class ShootingStar {
+class ShootingStar: public Graphic {
   public:
     ShootingStar(glm::vec2 starting_position, ci::Color color,
                  float trajectory_angle, float star_head_radius);
@@ -16,7 +17,7 @@ class ShootingStar {
      * Updates star's position using y = m x + b where
      * m = tan(y) where y is in radians.
      */
-    void UpdatePosition();
+    void Update();
 
   private:
     static constexpr size_t kMoveByXPixels = 1;
@@ -39,7 +40,7 @@ class ShootingStar {
     // used to draw tail of shooting star
     std::vector<glm::vec2> past_positions_;
 
-    void DrawTail() const;
+    void DrawStarTail() const;
 
     void DrawStar(glm::vec2 star_position, bool is_head_star) const;
 };

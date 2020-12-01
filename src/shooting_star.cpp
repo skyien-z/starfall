@@ -16,7 +16,7 @@ float trajectory_angle, float star_head_radius) : position_(starting_position),
     darker_color_.set(ci::CM_RGB, darker_hue);
 }
 
-void ShootingStar::UpdatePosition() {
+void ShootingStar::Update() {
     // Adds current position to past_positions_
     if (past_positions_.empty()) {
         past_positions_.push_back(glm::vec2(position_.x, position_.y));
@@ -32,14 +32,13 @@ void ShootingStar::UpdatePosition() {
 }
 
 void ShootingStar::Draw() const {
-    // Draws "stars" that aggregate into star tail
-    DrawTail();
+    DrawStarTail();
 
     // Draws current star head
     DrawStar(position_, true);
 }
 
-void ShootingStar::DrawTail() const {
+void ShootingStar::DrawStarTail() const {
     // Draws "stars" that aggregate into star tail
     for (const glm::vec2& past_position: past_positions_) {
         DrawStar(past_position, false);

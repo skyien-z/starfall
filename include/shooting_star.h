@@ -36,6 +36,11 @@ class ShootingStar {
     float star_hue_radius_;
     float tail_length_;
 
+    // used to draw tail of shooting star
+    std::vector<glm::vec2> past_positions_;
+
     void DrawTail() const;
+
+    void DrawStar(glm::vec2 star_position, bool is_head_star) const;
 };
 }

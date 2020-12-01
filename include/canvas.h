@@ -18,12 +18,22 @@ class Canvas: public Graphic {
      * @param boundary_point vec2 point to add to list
      */
     void AddPointToBoundaries(const glm::vec2 &boundary_point);
+
+    /**
+     * Adds a star to the star list.
+     *
+     * @param star to add to list
+     */
+    void AddStarToList(const ShootingStar& star);
+
+    bool IsStarAtBoundary(ShootingStar star) const;
+
+    const std::vector<ShootingStar>& GetStarList();
+
   private:
     std::vector<ShootingStar> star_list_;
 
     // Contains list of positions that create the mountain boundary
     std::vector<glm::vec2> boundary_points_;
-
-    bool isStarAtBoundary(ShootingStar star) const;
 };
 }

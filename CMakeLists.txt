@@ -56,7 +56,8 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
                             src/canvas.cpp
         src/graphic.cpp)
 
-list(APPEND TEST_FILES tests/shooting_star_test.cpp)
+list(APPEND TEST_FILES tests/shooting_star_test.cpp
+                        tests/canvas_test.cpp)
 
 ci_make_app(
         APP_NAME        starfall

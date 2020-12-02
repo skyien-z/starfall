@@ -7,13 +7,21 @@ class Canvas: public Graphic {
   public:
     Canvas(const glm::vec2 &top_left_corner, double canvas_size, double margin);
 
+    /**
+     * Renders all shooting stars in the canvas.
+     */
     void Draw() const;
 
+    /**
+     * Updates state of all shooting stars in canvas. Checks if star
+     * touches boundary and shortens it accordingly, and deletes star
+     * when star is hidden from view
+     */
     void Update();
 
     /**
      * Adds vec2 point to boundary points list; star disappears
-     * when it touches any of these points
+     * when it touches any of these points.
      *
      * @param boundary_point vec2 point to add to list
      */
@@ -42,7 +50,5 @@ class Canvas: public Graphic {
 
     // Contains list of positions that creates the mountain boundary
     std::vector<glm::vec2> boundary_points_;
-
-    static bool HasStarDisappeared(const ShootingStar &star);
 };
 }

@@ -27,7 +27,7 @@ class ShootingStar: public Graphic {
      * @param point_on_graph to check for star head contact
      * @return true if star head touches point; false otherwise
      */
-    bool DoesStarTouchPoint(glm::vec2& point_on_graph);
+    bool DoesStarTouchPoint(const glm::vec2& point_on_graph) const;
 
     const glm::vec2& GetPosition() const;
 
@@ -36,7 +36,9 @@ class ShootingStar: public Graphic {
      * to true, which stops the star from updating its position,
      * drawing, its head, or checking its boundaries.
      */
-    void RemoveStar();
+    void Disappear_Behind_Boundary();
+
+    bool HasDisappeared() const;
 
  private:
     static constexpr size_t kMoveByXPixels = 1;

@@ -16,7 +16,7 @@ float trajectory_angle) : position_(starting_position),
 
 void ShootingStar::Update() {
     // past_positions_ will only be empty if star is not needed anymore
-    if (is_disappearing) { // TODO: pop star when empty in canvas; pop on timer
+    if (is_disappearing) {
         return;
     }
 
@@ -58,16 +58,16 @@ void ShootingStar::DrawStar(glm::vec2 star_position, bool is_head_star) const {
     }
 }
 
-bool ShootingStar::DoesStarTouchPoint(glm::vec2 &point_on_graph) {
+bool ShootingStar::DoesStarTouchPoint(const glm::vec2 &point_on_graph) const {
     // past_positions_ will only be empty if star is not needed anymore
-    // so star will not technically "touch" any points
+    // so star will not technically "touch" any point
     if (past_positions_.empty()) {
         return false;
     }
     return length(position_ - point_on_graph) <= star_head_radius_;
 }
 
-void ShootingStar::RemoveStar() {
+void ShootingStar::Disappear_Behind_Boundary() {
     is_disappearing = true;
     past_positions_.erase(past_positions_.begin());
 }
@@ -79,6 +79,10 @@ void ShootingStar::UpdatePosition() {
 
 const glm::vec2 &ShootingStar::GetPosition() const {
     return position_;
+}
+
+bool ShootingStar::HasDisappeared() const{
+    return past_positions_.empty();
 }
 
 }

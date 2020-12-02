@@ -9,27 +9,34 @@ Canvas::Canvas(const glm::vec2 &top_left_corner, double canvas_size, double marg
 }
 
 void Canvas::Draw() const {
-    for (auto &star: star_list_) {
+    for (const auto &star: star_list_) {
         star.Draw();
     }
 }
 
 void Canvas::Update() {
     for (auto &star: star_list_) {
+        // Shortens star if star touches boundary and deletes star
+        // when star is hidden from view
         if (IsStarAtBoundary(star)) {
-            star.RemoveStar();
+            star.Disappear_Behind_Boundary();
+            std::remove_if(star_list_.begin(),
+                           star_list_.end(), HasStarDisappeared);
+            break;
         }
-        star.Update();
+        star.Update(); // Will not change position if star touches boundaries
     }
 }
+
+
 
 void Canvas::AddPointToBoundaries(const glm::vec2 &boundary_point) {
     boundary_points_.push_back(boundary_point);
 }
 
-bool Canvas::IsStarAtBoundary(ShootingStar star) const {
+bool Canvas::IsStarAtBoundary(const ShootingStar& star) const {
     for (const glm::vec2& boundary_point: boundary_points_) {
-        if (star.DoesStarTouchPoint(const_cast<glm::vec2 &>(boundary_point))) {
+        if (star.DoesStarTouchPoint(boundary_point)) {
             return true;
         }
     }
@@ -42,6 +49,10 @@ void Canvas::AddStarToList(const ShootingStar& star) {
 
 const std::vector<ShootingStar> &Canvas::GetStarList() {
     return star_list_;
+}
+
+bool Canvas::HasStarDisappeared(const ShootingStar& star){
+    return star.HasDisappeared();
 }
 
 }

@@ -102,5 +102,11 @@ bool ShootingStar::HasDisappeared() const{
     return past_positions_.empty();
 }
 
+bool ShootingStar::DoesStarTailHaveCoordinateValue(float coordinate_value,
+                                                   bool is_x_coordinate) const {
+    return (is_x_coordinate && past_positions_.front().x == coordinate_value) ||
+           (!is_x_coordinate && past_positions_.front().y == coordinate_value);
+}
+
 }
 

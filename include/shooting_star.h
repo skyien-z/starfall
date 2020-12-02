@@ -31,19 +31,31 @@ class ShootingStar: public Graphic {
     void Update();
 
     /**
-     * Checks if star head touches point given
+     * Checks if star head touches point given.
      *
      * @param point_on_graph to check for star head contact
      * @return true if star head touches point; false otherwise
      */
     bool DoesStarTouchPoint(const glm::vec2& point_on_graph) const;
 
+    /**
+     * Checks if last tail star (the first star in past_positions) has
+     * either its x or y value (depending on the passed in boolean) is
+     * at the value of passed in float value.
+     *
+     * @param coordinate_value; float to check position element against
+     * @param is_x_coordinate; boolean denoting whether to check the x or y value
+     * @return true if position element and coordinate element match, false otherwise
+     */
+    bool DoesStarTailHaveCoordinateValue(float coordinate_value,
+                                         bool is_x_coordinate) const;
+
     const glm::vec2& GetPosition() const;
 
     /**
-     * Removes star at the last position sets is_disappearing
-     * to true, which stops the star from updating its position,
-     * drawing, its head, or checking its boundaries.
+     * Removes star at the last position from past positions list,
+     * sets is_disappearing to true, which stops the star from
+     * updating its position, drawing, its head, or checking its boundaries.
      */
     void DisappearProgressively();
 

@@ -50,16 +50,29 @@ class Canvas: public Graphic {
      * @return true if star is at boundary or in the process of disappearing;
      * false if star has disappeared or has not started disappearing.
      */
-    bool IsStarDisappearing(const ShootingStar& star) const;
+    bool IsStarDisappearingBehindBoundary(const ShootingStar& star) const;
 
+    /**
+     * Clears vector that holds boundary points.
+     */
     void RemoveBoundaries();
 
     const std::vector<ShootingStar>& GetStarList();
 
   private:
+    // These floats represent the highest and lowest y values of the canvas
+    float top_bound_; // corresponds to lowest y value
+    float bottom_bound_; // corresponds to highest y value
+
+    // These floats represent the rightmost and leftmost x values of the canvas
+    float right_bound_; // rightmost x value
+    float left_bound_; // leftmost x value
+
     std::vector<ShootingStar> star_list_;
 
     // Contains list of positions that creates the mountain boundary
     std::vector<glm::vec2> boundary_points_;
+
+    bool IsStarOutOfBounds(const ShootingStar& star) const;
 };
 }

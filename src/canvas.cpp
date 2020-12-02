@@ -3,8 +3,11 @@
 namespace starfall {
 
 Canvas::Canvas(const glm::vec2 &top_left_corner, double canvas_size, double margin) {
-//    ShootingStar star(glm::vec2(50, 50));
-//    star_list_.push_back(star);
+    top_bound_ = top_left_corner.y;
+    bottom_bound_ = top_bound_ + canvas_size;
+
+    left_bound_ = top_left_corner.x;
+    right_bound_ = left_bound_ + canvas_size;
 }
 
 void Canvas::Draw() const {
@@ -17,13 +20,13 @@ void Canvas::Update() {
     for (size_t i = 0; i < star_list_.size(); i++) {
         // Shortens star if star touches boundary and deletes star
         // when star is hidden from view
-        if (star_list_[i].HasDisappeared()) {
+        if (star_list_[i].HasDisappeared() || IsStarOutOfBounds(star_list_[i])) {
             auto star_to_remove_it = star_list_.begin() + i;
             if (star_to_remove_it != star_list_.end()) {
                 star_list_.erase(star_to_remove_it);
                 break;
             }
-        } else if (IsStarDisappearing(star_list_[i])) {
+        } else if (IsStarDisappearingBehindBoundary(star_list_[i])) {
             star_list_[i].DisappearProgressively();
             break;
         }
@@ -40,12 +43,7 @@ void Canvas::RemoveBoundaries() {
     boundary_points_.clear();
 }
 
-bool Canvas::IsStarDisappearing(const ShootingStar& star) const {
-    // Disappeared star will not touch any points
-    if (star.HasDisappeared()) {
-        return false;
-    }
-
+bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar& star) const {
     for (const glm::vec2& boundary_point: boundary_points_) {
         if (star.DoesStarTouchPoint(boundary_point)) {
             return true;
@@ -53,6 +51,13 @@ bool Canvas::IsStarDisappearing(const ShootingStar& star) const {
     }
 
     return false;
+}
+
+bool Canvas::IsStarOutOfBounds(const ShootingStar &star) const {
+    return star.DoesStarTailHaveCoordinateValue(top_bound_, false) ||
+            star.DoesStarTailHaveCoordinateValue(bottom_bound_, false) ||
+            star.DoesStarTailHaveCoordinateValue(right_bound_, false) ||
+            star.DoesStarTailHaveCoordinateValue(left_bound_, false);
 }
 
 void Canvas::AddStarToList(const glm::vec2 &starting_position) {

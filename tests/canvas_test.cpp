@@ -15,13 +15,13 @@ TEST_CASE("Test whether star is at canvas boundary") {
         ShootingStar star(glm::vec2(54, 54),
                           ci::Color(0, 255, 0), M_PI / 4);
 
-        REQUIRE(test_canvas.IsStarDisappearing(star));
+        REQUIRE(test_canvas.IsStarDisappearingBehindBoundary(star));
     }
 
     SECTION("Star is outside boundary") {
         ShootingStar star_2(glm::vec2(55, 58),
                             ci::Color(0, 255, 0), M_PI / 4);
-        REQUIRE_FALSE(test_canvas.IsStarDisappearing(star_2));
+        REQUIRE_FALSE(test_canvas.IsStarDisappearingBehindBoundary(star_2));
     }
 }
 
@@ -33,7 +33,7 @@ TEST_CASE("Star progressive disappears after hitting boundary") {
 
     test_canvas.AddPointToBoundaries(glm::vec2(55, 55));
 
-    REQUIRE(test_canvas.IsStarDisappearing(star));
+    REQUIRE(test_canvas.IsStarDisappearingBehindBoundary(star));
 }
 
 TEST_CASE("Test Deleting Star After Boundary Collision") {
@@ -45,9 +45,9 @@ TEST_CASE("Test Deleting Star After Boundary Collision") {
     test_canvas.AddPointToBoundaries(glm::vec2(55, 55));
 
     test_canvas.AddStarToList(star);
-    REQUIRE_FALSE(test_canvas.IsStarDisappearing(test_canvas.GetStarList()[0]));
+    REQUIRE_FALSE(test_canvas.IsStarDisappearingBehindBoundary(test_canvas.GetStarList()[0]));
     test_canvas.Update();
-    REQUIRE(test_canvas.IsStarDisappearing(test_canvas.GetStarList()[0]));
+    REQUIRE(test_canvas.IsStarDisappearingBehindBoundary(test_canvas.GetStarList()[0]));
 
     SECTION("Star Hits Boundary and is Updated to Disappear") {
         test_canvas.Update();

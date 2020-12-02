@@ -43,8 +43,6 @@ class Canvas: public Graphic {
      */
     void AddStarToList(const ShootingStar& star);
 
-    void AddStarToList(const glm::vec2& starting_position);
-
     void AddStarToList(const glm::vec2& starting_position,
                         const ci::Color& star_color, float trajectory);
 

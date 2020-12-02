@@ -62,10 +62,6 @@ bool Canvas::IsStarOutOfBounds(const ShootingStar &star) const {
             star.DoesStarTailHaveCoordinateValue(left_bound_, true);
 }
 
-void Canvas::AddStarToList(const glm::vec2 &starting_position) {
-    AddStarToList(ShootingStar(starting_position));
-}
-
 void Canvas::AddStarToList(const glm::vec2 &starting_position,
                            const cinder::Color &star_color, float trajectory) {
     AddStarToList(ShootingStar(starting_position, star_color, trajectory));

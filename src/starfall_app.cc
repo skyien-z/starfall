@@ -25,11 +25,10 @@ void StarfallApp::update() {
 }
 
 void StarfallApp::mouseDown(ci::app::MouseEvent event) {
-    if (event.isLeftDown()) {
-        canvas_.AddPointToBoundaries(event.getPos());
+    if (event.isLeftDown() && event.isRightDown()) {
+        canvas_.AddStarToList(event.getPos());
     }
 }
-
 
 void StarfallApp::mouseDrag(ci::app::MouseEvent event) {
     if (event.isShiftDown()) {

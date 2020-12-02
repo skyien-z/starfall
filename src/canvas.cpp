@@ -3,9 +3,8 @@
 namespace starfall {
 
 Canvas::Canvas(const glm::vec2 &top_left_corner, double canvas_size, double margin) {
-//    ShootingStar star(glm::vec2(50, 50),
-//                      ci::Color(0, 255, 0), M_PI / 4);
-//    star_list_.push_back(star);
+    ShootingStar star(glm::vec2(50, 50));
+    star_list_.push_back(star);
 }
 
 void Canvas::Draw() const {
@@ -22,8 +21,8 @@ void Canvas::Update() {
             auto star_to_remove_it = star_list_.begin() + i;
             if (star_to_remove_it != star_list_.end()) {
                 star_list_.erase(star_to_remove_it);
+                break;
             }
-            break;
         } else if (IsStarDisappearing(star_list_[i])) {
             star_list_[i].DisappearProgressively();
             break;
@@ -52,9 +51,13 @@ bool Canvas::IsStarDisappearing(const ShootingStar& star) const {
     return false;
 }
 
+void Canvas::AddStarToList(const glm::vec2 &starting_position) {
+    AddStarToList(ShootingStar(starting_position));
+}
+
 void Canvas::AddStarToList(const glm::vec2 &starting_position,
                            const cinder::Color &star_color) {
-
+    AddStarToList(ShootingStar(starting_position, star_color));
 }
 
 void Canvas::AddStarToList(const ShootingStar& star) {

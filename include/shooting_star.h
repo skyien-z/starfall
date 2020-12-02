@@ -60,7 +60,6 @@ class ShootingStar: public Graphic {
     static constexpr float star_head_radius_ = 2;
 
     static constexpr float kDefaultTrajectory = M_PI/4;
-    const ci::Color kDefaultColor = ci::Color(0, 255, 0);
 
     // Star tail length in pixels is
     // (star_head_radius_/2) * tail_length_proportion_
@@ -93,5 +92,7 @@ class ShootingStar: public Graphic {
      * Changes current position according to y = m x + b; m = tan(y) where y is in radians
      */
     void UpdatePosition();
+
+    void Initialize_Variables(const glm::vec2& starting_position);
 };
 }

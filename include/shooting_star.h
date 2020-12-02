@@ -5,6 +5,10 @@
 #include "graphic.h"
 
 namespace starfall {
+
+/**
+ * Creates and renders a single shooting star with its functionality
+ */
 class ShootingStar: public Graphic {
   public:
     ShootingStar(glm::vec2 starting_position, ci::Color color,

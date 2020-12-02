@@ -3,6 +3,10 @@
 #include "shooting_star.h"
 
 namespace starfall {
+
+/**
+ * Creates canvas that handles rendering all shooting stars
+ */
 class Canvas: public Graphic {
   public:
     Canvas(const glm::vec2 &top_left_corner, double canvas_size, double margin);

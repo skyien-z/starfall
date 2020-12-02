@@ -46,7 +46,7 @@ void ShootingStar::Update() {
 
     // Adds current position to past_positions_ if current position is at least
     // radius/2 away from last star in past_positions
-    if (abs(position_.x - past_positions_.back().x) >= star_head_radius_/2) {
+    if (length(position_ - past_positions_.back()) >= star_head_radius_/2) {
         past_positions_.push_back(glm::vec2(position_.x, position_.y));
     }
 

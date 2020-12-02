@@ -68,14 +68,14 @@ class ShootingStar: public Graphic {
     bool HasDisappeared() const;
 
  private:
-    static constexpr size_t kMoveByXPixels = 1;
+    static constexpr size_t kMoveByXPixels = 2;
     static constexpr float star_head_radius_ = 2;
 
     static constexpr float kDefaultTrajectory = M_PI/4;
 
     // Star tail length in pixels is
     // (star_head_radius_/2) * tail_length_proportion_
-    static constexpr int tail_length_proportion_ = 30;
+    static constexpr int tail_length_proportion_ = 15;
 
     // variables that change with timer
     glm::vec2 position_;

@@ -61,21 +61,30 @@ TEST_CASE("Test Deleting Star After Drawn Boundary Collision") {
 TEST_CASE("Test Deleting Star After Star Falls Out of Bounds") {
     Canvas test_canvas(glm::vec2(50, 50),
                        200, 200);
-    // the last center of the last circle that makes up the tail will be at (250, 55)
-    ShootingStar star(glm::vec2(250 + 30 * 1, 55),
-                      ci::Color(0, 255, 0), 0);
+
+    SECTION("Star is initialized at boundary") {
+        // the last center of the last circle that makes up the tail will be at (250, 55)
+        ShootingStar star(glm::vec2(250, 55),
+                          ci::Color(0, 255, 0), 0);
 
 
-    test_canvas.AddStarToList(star);
-    REQUIRE_FALSE(test_canvas.IsStarDisappearingBehindBoundary(test_canvas.GetStarList()[0]));
-    test_canvas.Update();
-    REQUIRE(test_canvas.IsStarDisappearingBehindBoundary(test_canvas.GetStarList()[0]));
+        test_canvas.AddStarToList(star);
+        test_canvas.Update();
 
-    SECTION("Star Hits Boundary and is Updated to Disappear") {
-        test_canvas.Update();
-        test_canvas.Update();
-        test_canvas.Update();
         REQUIRE(test_canvas.GetStarList().empty());
     }
 
+    SECTION("Star moves out of bounds") {
+        ShootingStar star(glm::vec2(248, 55),
+                          ci::Color(0, 255, 0), 0);
+
+        // the last center of the last circle that makes up the tail will be at (250, 55)
+        for (size_t i = 0; i < 16; i++) {
+            test_canvas.Update();
+        }
+
+        // this update should delete star
+        test_canvas.Update();
+        REQUIRE(test_canvas.GetStarList().empty());
+    }
 }

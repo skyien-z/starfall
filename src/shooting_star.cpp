@@ -39,6 +39,18 @@ void ShootingStar::Update() {
     }
 }
 
+void ShootingStar::UpdatePosition() {
+    // As cinder graphically flips Q1 and Q2 with Q3 and Q4, decreases
+    // x position when trajectory is between -Pi and -2 Pi
+    if (trajectory_angle_ < -M_PI && trajectory_angle_ > -2 * M_PI) {
+        position_.x = position_.x - kMoveByXPixels;
+    } else {
+        position_.x = kMoveByXPixels + position_.x;
+    }
+
+    position_.y = std::tan(trajectory_angle_) * kMoveByXPixels + position_.y;
+}
+
 void ShootingStar::Draw() const {
     // Draws "stars" that aggregate into colored star tail
     for (const glm::vec2& past_position: past_positions_) {
@@ -67,14 +79,15 @@ bool ShootingStar::DoesStarTouchPoint(const glm::vec2 &point_on_graph) const {
     return length(position_ - point_on_graph) <= star_head_radius_;
 }
 
+bool ShootingStar::DoesStarTailHaveCoordinateValue(float coordinate_value,
+                                                   bool is_x_coordinate) const {
+    return (is_x_coordinate && abs(past_positions_.front().x - coordinate_value) <= star_head_radius_) ||
+           (!is_x_coordinate && abs(past_positions_.front().y - coordinate_value) <= star_head_radius_);
+}
+
 void ShootingStar::DisappearProgressively() {
     is_disappearing = true;
     past_positions_.erase(past_positions_.begin());
-}
-
-void ShootingStar::UpdatePosition() {
-    position_.x = kMoveByXPixels + position_.x;
-    position_.y = std::tan(trajectory_angle_) * kMoveByXPixels + position_.y;
 }
 
 const glm::vec2 &ShootingStar::GetPosition() const {
@@ -83,12 +96,6 @@ const glm::vec2 &ShootingStar::GetPosition() const {
 
 bool ShootingStar::HasDisappeared() const{
     return past_positions_.empty();
-}
-
-bool ShootingStar::DoesStarTailHaveCoordinateValue(float coordinate_value,
-                                                   bool is_x_coordinate) const {
-    return (is_x_coordinate && abs(past_positions_.front().x - coordinate_value) <= star_head_radius_) ||
-           (!is_x_coordinate && abs(past_positions_.front().y - coordinate_value) <= star_head_radius_);
 }
 
 }

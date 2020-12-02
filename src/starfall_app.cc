@@ -43,8 +43,8 @@ void StarfallApp::mouseDrag(ci::app::MouseEvent event) {
 }
 
 void StarfallApp::mouseWheel(ci::app::MouseEvent event) {
-    // each wheel increment up increases trajectory by Pi/6
-    // while each wheel increment down decreases trajectory by Pi/6
+    // each wheel increment up increases trajectory by Pi/5
+    // while each wheel increment down decreases trajectory by Pi/5
     current_trajectory_ = event.getWheelIncrement() + M_PI/6;
 }
 

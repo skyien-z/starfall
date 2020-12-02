@@ -5,6 +5,8 @@
 
 using namespace starfall;
 
+const int kMoveByX = 2;
+
 TEST_CASE("Does Star Touch Point") {
     // radius of all stars is 2
 
@@ -28,20 +30,20 @@ TEST_CASE("Does Star Touch Point") {
 }
 
 TEST_CASE("Update Star Position") {
-    SECTION("Negative Slope") {
+    SECTION("Negative Slope (from viewing perspective); star heads right") {
         // radius of all stars is 2
         ShootingStar star(glm::vec2(50, 50),
                           ci::Color(0, 255, 0), M_PI / 4);
         star.Update();
-        REQUIRE(star.GetPosition() == glm::vec2(51, 51));
+        REQUIRE(star.GetPosition() == glm::vec2(50 + kMoveByX, 50 + kMoveByX));
     }
 
-    SECTION("Positive Slope") {
+    SECTION("Positive Slope (from viewing perspective); star heads left") {
         // radius of all stars is 2
         ShootingStar star(glm::vec2(50, 50),
                           ci::Color(0, 255, 0), -5 * M_PI / 4);
         star.Update();
-        REQUIRE(star.GetPosition() == glm::vec2(51, 49));
+        REQUIRE(star.GetPosition() == glm::vec2(50 - kMoveByX, 50 - kMoveByX));
     }
 }
 

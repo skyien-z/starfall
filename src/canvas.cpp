@@ -36,6 +36,10 @@ void Canvas::AddPointToBoundaries(const glm::vec2 &boundary_point) {
     boundary_points_.push_back(boundary_point);
 }
 
+void Canvas::RemoveBoundaries() {
+    boundary_points_.clear();
+}
+
 bool Canvas::IsStarDisappearing(const ShootingStar& star) const {
     // Disappeared star will not touch any points
     if (star.HasDisappeared()) {
@@ -56,8 +60,8 @@ void Canvas::AddStarToList(const glm::vec2 &starting_position) {
 }
 
 void Canvas::AddStarToList(const glm::vec2 &starting_position,
-                           const cinder::Color &star_color) {
-    AddStarToList(ShootingStar(starting_position, star_color));
+                           const cinder::Color &star_color, float trajectory) {
+    AddStarToList(ShootingStar(starting_position, star_color, trajectory));
 }
 
 void Canvas::AddStarToList(const ShootingStar& star) {

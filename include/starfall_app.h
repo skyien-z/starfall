@@ -18,6 +18,7 @@ class StarfallApp : public ci::app::App {
   void draw() override;
   void update() override;
 
+  void mouseWheel(ci::app::MouseEvent event) override;
   void mouseDown(ci::app::MouseEvent event) override;
   void mouseDrag(ci::app::MouseEvent event) override;
   void keyDown(ci::app::KeyEvent event) override;
@@ -29,6 +30,7 @@ class StarfallApp : public ci::app::App {
     Canvas canvas_;
     ci::gl::Texture2dRef background_image_;
     ci::Color current_color_;
+    float current_trajectory_;
 };
 
 }  // namespace ideal_gas

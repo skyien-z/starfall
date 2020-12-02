@@ -5,6 +5,7 @@ namespace starfall {
 StarfallApp::StarfallApp(): canvas_(glm::vec2(kMargin, kMargin),
               kWindowSize, kMargin) {
     current_color_ = ci::Color(0, 255, 0);
+    current_trajectory_ = M_PI / 4;
 }
 
 void StarfallApp::draw() {
@@ -27,7 +28,7 @@ void StarfallApp::update() {
 
 void StarfallApp::mouseDown(ci::app::MouseEvent event) {
     if (event.isRightDown()) {
-        canvas_.AddStarToList(event.getPos(), current_color_);
+        canvas_.AddStarToList(event.getPos(), current_color_, current_trajectory_);
     }
 }
 
@@ -35,6 +36,12 @@ void StarfallApp::mouseDrag(ci::app::MouseEvent event) {
     if (event.isShiftDown()) {
         canvas_.AddPointToBoundaries(event.getPos());
     }
+}
+
+void StarfallApp::mouseWheel(ci::app::MouseEvent event) {
+    // each wheel increment up increases trajectory by Pi/6
+    // while each wheel increment down decreases trajectory by Pi/6
+    current_trajectory_ = event.getWheelIncrement() + M_PI/6;
 }
 
 void StarfallApp::keyDown(ci::app::KeyEvent event) {
@@ -52,6 +59,7 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
       current_color_ = ci::Color(255, 128, 0);
       break;
     case ci::app::KeyEvent::KEY_DELETE:
+        canvas_.RemoveBoundaries();
       break;
   }
 }

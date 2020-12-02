@@ -41,7 +41,7 @@ class Canvas: public Graphic {
     void AddStarToList(const glm::vec2& starting_position);
 
     void AddStarToList(const glm::vec2& starting_position,
-                        const ci::Color& star_color);
+                        const ci::Color& star_color, float trajectory);
 
     /**
      * Checks if star has disappeared or is in the process of disappearing.
@@ -51,6 +51,8 @@ class Canvas: public Graphic {
      * false if star has disappeared or has not started disappearing.
      */
     bool IsStarDisappearing(const ShootingStar& star) const;
+
+    void RemoveBoundaries();
 
     const std::vector<ShootingStar>& GetStarList();
 

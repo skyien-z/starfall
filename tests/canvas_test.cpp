@@ -7,7 +7,7 @@ using namespace starfall;
 
 TEST_CASE("Test whether star is at canvas boundary") {
     Canvas test_canvas(glm::vec2(50, 50),
-            200, 50);
+                       200, 0);
 
     test_canvas.AddPointToBoundaries(glm::vec2(55, 55));
 
@@ -27,7 +27,7 @@ TEST_CASE("Test whether star is at canvas boundary") {
 
 TEST_CASE("Star progressive disappears after hitting boundary") {
     Canvas test_canvas(glm::vec2(50, 50),
-                       200, 50);
+                       200, 0);
     ShootingStar star(glm::vec2(54, 54),
                       ci::Color(0, 255, 0), M_PI / 4);
 
@@ -38,7 +38,7 @@ TEST_CASE("Star progressive disappears after hitting boundary") {
 
 TEST_CASE("Test Deleting Star After Boundary Collision") {
     Canvas test_canvas(glm::vec2(50, 50),
-                       200, 50);
+                       200, 0);
     ShootingStar star(glm::vec2(53, 53),
                       ci::Color(0, 255, 0), M_PI / 4);
 

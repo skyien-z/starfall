@@ -14,6 +14,9 @@ class StarfallApp : public ci::app::App {
  public:
   StarfallApp();
 
+  /**
+   * Sets up background images, and from that, the app canvas.
+   */
   void setup() override;
   void draw() override;
   void update() override;

@@ -9,7 +9,12 @@ namespace starfall {
  */
 class Canvas: public Graphic {
   public:
-    Canvas(const glm::vec2 &top_left_corner, double canvas_size, double margin);
+    /**
+     * Default constructor for canvas.
+     */
+    Canvas();
+
+    Canvas(const glm::vec2 &top_left_corner, double canvas_width, double canvas_height);
 
     /**
      * Renders all shooting stars in the canvas.
@@ -73,6 +78,13 @@ class Canvas: public Graphic {
     // Contains list of positions that creates the mountain boundary
     std::vector<glm::vec2> boundary_points_;
 
+    /**
+     * Checks if given star has left the bounds of the canvas.
+     *
+     * @param star; star to check bounds for.
+     * @return true is last star that makes up the star tail has
+     * passes the bounds of canvas, false otherwise.
+     */
     bool IsStarOutOfBounds(const ShootingStar& star) const;
 };
 }

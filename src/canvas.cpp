@@ -2,12 +2,12 @@
 
 namespace starfall {
 
-Canvas::Canvas(const glm::vec2 &top_left_corner, double canvas_size, double margin) {
+Canvas::Canvas(const glm::vec2 &top_left_corner, double canvas_width, double canvas_height) {
     top_bound_ = top_left_corner.y;
-    bottom_bound_ = top_bound_ + canvas_size;
+    bottom_bound_ = top_bound_ + canvas_height;
 
     left_bound_ = top_left_corner.x;
-    right_bound_ = left_bound_ + canvas_size;
+    right_bound_ = left_bound_ + canvas_width;
 }
 
 void Canvas::Draw() const {
@@ -56,8 +56,8 @@ bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar& star) const {
 bool Canvas::IsStarOutOfBounds(const ShootingStar &star) const {
     return star.DoesStarTailHaveCoordinateValue(top_bound_, false) ||
             star.DoesStarTailHaveCoordinateValue(bottom_bound_, false) ||
-            star.DoesStarTailHaveCoordinateValue(right_bound_, false) ||
-            star.DoesStarTailHaveCoordinateValue(left_bound_, false);
+            star.DoesStarTailHaveCoordinateValue(right_bound_, true) ||
+            star.DoesStarTailHaveCoordinateValue(left_bound_, true);
 }
 
 void Canvas::AddStarToList(const glm::vec2 &starting_position) {

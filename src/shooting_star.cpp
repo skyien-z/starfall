@@ -15,6 +15,7 @@ ShootingStar::ShootingStar(const glm::vec2 &starting_position,
                            const cinder::Color &color) :
                             position_(starting_position),
                             color_(color) {
+    trajectory_angle_ = kDefaultTrajectory;
     Initialize_Variables(starting_position);
 }
 

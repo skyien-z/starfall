@@ -4,6 +4,7 @@ namespace starfall {
 
 StarfallApp::StarfallApp(): canvas_(glm::vec2(kMargin, kMargin),
               kWindowSize, kMargin) {
+    current_color_ = ci::Color(0, 255, 0);
 }
 
 void StarfallApp::draw() {
@@ -25,8 +26,8 @@ void StarfallApp::update() {
 }
 
 void StarfallApp::mouseDown(ci::app::MouseEvent event) {
-    if (event.isLeftDown() && event.isRightDown()) {
-        canvas_.AddStarToList(event.getPos());
+    if (event.isRightDown()) {
+        canvas_.AddStarToList(event.getPos(), current_color_);
     }
 }
 
@@ -38,11 +39,17 @@ void StarfallApp::mouseDrag(ci::app::MouseEvent event) {
 
 void StarfallApp::keyDown(ci::app::KeyEvent event) {
   switch (event.getCode()) {
-  case ci::app::KeyEvent::KEY_DOWN:
+  case ci::app::KeyEvent::KEY_r:
+      current_color_ = ci::Color(255, 0, 0);
       break;
-  case ci::app::KeyEvent::KEY_UP:
+  case ci::app::KeyEvent::KEY_g:
+      current_color_ = ci::Color(0, 255, 0);
       break;
-  case ci::app::KeyEvent::KEY_TAB:
+  case ci::app::KeyEvent::KEY_b:
+      current_color_ = ci::Color(0, 0, 255);
+      break;
+  case ci::app::KeyEvent::KEY_o:
+      current_color_ = ci::Color(255, 128, 0);
       break;
     case ci::app::KeyEvent::KEY_DELETE:
       break;

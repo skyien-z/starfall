@@ -16,8 +16,9 @@ class ShootingStar: public Graphic {
     void Draw() const;
 
     /**
-     * Updates star's position using y = m x + b where
-     * m = tan(y) where y is in radians.
+     * Updates star head's position and position of colored stars
+     * that make up the shooting star's tail. Keeps tail length
+     * constant.
      */
     void Update();
 
@@ -38,6 +39,12 @@ class ShootingStar: public Graphic {
      */
     void Disappear_Behind_Boundary();
 
+    /**
+     * Returns when past_positions_ is empty, which is when the star
+     * disappears from view
+     *
+     * @return state of past_positions_
+     */
     bool HasDisappeared() const;
 
  private:

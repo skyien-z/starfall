@@ -26,7 +26,14 @@ class Canvas: public Graphic {
      */
     void AddStarToList(const ShootingStar& star);
 
-    bool IsStarAtBoundary(const ShootingStar& star) const;
+    /**
+     * Checks if star has disappeared or is in the process of disappearing.
+     *
+     * @param star to check boundaries for
+     * @return true if star is at boundary or in the process of disappearing;
+     * false if star has disappeared or has not started disappearing.
+     */
+    bool IsStarDisappearing(const ShootingStar& star) const;
 
     const std::vector<ShootingStar>& GetStarList();
 

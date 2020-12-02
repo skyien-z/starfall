@@ -59,11 +59,6 @@ void ShootingStar::DrawStar(glm::vec2 star_position, bool is_head_star) const {
 }
 
 bool ShootingStar::DoesStarTouchPoint(const glm::vec2 &point_on_graph) const {
-    // past_positions_ will only be empty if star is not needed anymore
-    // so star will not technically "touch" any point
-    if (past_positions_.empty()) {
-        return false;
-    }
     return length(position_ - point_on_graph) <= star_head_radius_;
 }
 

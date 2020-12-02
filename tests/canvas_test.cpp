@@ -13,7 +13,7 @@ TEST_CASE("Test whether star is at canvas boundary") {
 
     test_canvas.AddPointToBoundaries(glm::vec2(55, 55));
 
-    REQUIRE(test_canvas.IsStarAtBoundary(star));
+    REQUIRE(test_canvas.IsStarDisappearing(star));
 }
 
 TEST_CASE("Test star hitting boundary deletion") {
@@ -24,5 +24,5 @@ TEST_CASE("Test star hitting boundary deletion") {
 
     test_canvas.AddPointToBoundaries(glm::vec2(55, 55));
 
-    REQUIRE(test_canvas.IsStarAtBoundary(star));
+    REQUIRE(test_canvas.IsStarDisappearing(star));
 }

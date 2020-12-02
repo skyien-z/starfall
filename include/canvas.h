@@ -38,6 +38,9 @@ class Canvas: public Graphic {
      */
     void AddStarToList(const ShootingStar& star);
 
+    void AddStarToList(const glm::vec2& starting_position,
+                       const ci::Color& star_color);
+
     /**
      * Checks if star has disappeared or is in the process of disappearing.
      *

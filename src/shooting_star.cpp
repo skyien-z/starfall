@@ -2,17 +2,28 @@
 
 namespace starfall {
 
-ShootingStar::ShootingStar(glm::vec2 starting_position, ci::Color color,
-float trajectory_angle) : position_(starting_position),
-                            color_(color),
-                            trajectory_angle_(trajectory_angle) {
+ShootingStar::ShootingStar(const glm::vec2& starting_position,
+                           const ci::Color& color,
+                           float trajectory_angle) :
+                           position_(starting_position),
+                           color_(color),
+                           trajectory_angle_(trajectory_angle) {
     timer.start();
 
     // Each star only shoots once so adds first position to past_positions_
     past_positions_.push_back(starting_position);
-
     is_disappearing = false;
 }
+
+ShootingStar::ShootingStar(const glm::vec2 &starting_position,
+                           const cinder::Color &color) {
+    ShootingStar(starting_position, color, kDefaultTrajectory);
+}
+
+ShootingStar::ShootingStar(const glm::vec2 &starting_position) {
+    ShootingStar(starting_position, kDefaultColor, kDefaultTrajectory);
+}
+
 
 void ShootingStar::Update() {
     // past_positions_ will only be empty if star is not needed anymore

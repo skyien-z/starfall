@@ -11,8 +11,12 @@ namespace starfall {
  */
 class ShootingStar: public Graphic {
   public:
-    ShootingStar(glm::vec2 starting_position, ci::Color color,
+    ShootingStar(const glm::vec2& starting_position, const ci::Color& color,
                  float trajectory_angle);
+
+    ShootingStar(const glm::vec2& starting_position, const ci::Color& color);
+
+    ShootingStar(const glm::vec2& starting_position);
 
     /**
      * Renders shooting star and its tail.
@@ -54,6 +58,9 @@ class ShootingStar: public Graphic {
  private:
     static constexpr size_t kMoveByXPixels = 1;
     static constexpr float star_head_radius_ = 2;
+
+    static constexpr float kDefaultTrajectory = M_PI/4;
+    const ci::Color kDefaultColor = ci::Color(0, 255, 0);
 
     // Star tail length in pixels is
     // (star_head_radius_/2) * tail_length_proportion_

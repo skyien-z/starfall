@@ -52,6 +52,11 @@ bool Canvas::IsStarDisappearing(const ShootingStar& star) const {
     return false;
 }
 
+void Canvas::AddStarToList(const glm::vec2 &starting_position,
+                           const cinder::Color &star_color) {
+
+}
+
 void Canvas::AddStarToList(const ShootingStar& star) {
     star_list_.push_back(star);
 }
@@ -59,4 +64,5 @@ void Canvas::AddStarToList(const ShootingStar& star) {
 const std::vector<ShootingStar> &Canvas::GetStarList() {
     return star_list_;
 }
+
 }

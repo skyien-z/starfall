@@ -24,6 +24,13 @@ void StarfallApp::update() {
     canvas_.Update();
 }
 
+void StarfallApp::mouseDown(ci::app::MouseEvent event) {
+    if (event.isLeftDown()) {
+        canvas_.AddPointToBoundaries(event.getPos());
+    }
+}
+
+
 void StarfallApp::mouseDrag(ci::app::MouseEvent event) {
     if (event.isShiftDown()) {
         canvas_.AddPointToBoundaries(event.getPos());

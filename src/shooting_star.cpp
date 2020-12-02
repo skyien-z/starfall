@@ -7,12 +7,17 @@ float trajectory_angle) : position_(starting_position),
                             color_(color),
                             trajectory_angle_(trajectory_angle) {
     timer.start();
+
+    // Each star only shoots once so adds first position to past_positions_
+    past_positions_.push_back(starting_position);
+
+    is_disappearing = false;
 }
 
 void ShootingStar::Update() {
-    // Adds first position to past_positions_
-    if (past_positions_.empty()) {
-        past_positions_.push_back(glm::vec2(position_.x, position_.y));
+    // past_positions_ will only be empty if star is not needed anymore
+    if (is_disappearing) { // TODO: pop star when empty in canvas; pop on timer
+        return;
     }
 
     UpdatePosition();
@@ -35,8 +40,10 @@ void ShootingStar::Draw() const {
         DrawStar(past_position, false);
     }
 
-    // Draws current star head
-    DrawStar(position_, true);
+    // Draws current star head if star is above mountains
+    if (!is_disappearing) {
+        DrawStar(position_, true);
+    }
 }
 
 void ShootingStar::DrawStar(glm::vec2 star_position, bool is_head_star) const {
@@ -52,10 +59,16 @@ void ShootingStar::DrawStar(glm::vec2 star_position, bool is_head_star) const {
 }
 
 bool ShootingStar::DoesStarTouchPoint(glm::vec2 &point_on_graph) {
+    // past_positions_ will only be empty if star is not needed anymore
+    // so star will not technically "touch" any points
+    if (past_positions_.empty()) {
+        return false;
+    }
     return length(position_ - point_on_graph) <= star_head_radius_;
 }
 
-void ShootingStar::RemoveStarHead() {
+void ShootingStar::RemoveStar() {
+    is_disappearing = true;
     past_positions_.erase(past_positions_.begin());
 }
 
@@ -66,14 +79,6 @@ void ShootingStar::UpdatePosition() {
 
 const glm::vec2 &ShootingStar::GetPosition() const {
     return position_;
-}
-
-bool ShootingStar::GetIsHeadStar() {
-    return is_head_star_;
-}
-
-void ShootingStar::SetIsHeadStar(bool is_head_star) {
-    is_head_star_ = is_head_star;
 }
 
 }

@@ -9,8 +9,6 @@ Canvas::Canvas(const glm::vec2 &top_left_corner, double canvas_size, double marg
 }
 
 void Canvas::Draw() const {
-    //background_.Draw();
-
     for (auto &star: star_list_) {
         star.Draw();
     }
@@ -18,11 +16,10 @@ void Canvas::Draw() const {
 
 void Canvas::Update() {
     for (auto &star: star_list_) {
-        star.Update();
-
         if (IsStarAtBoundary(star)) {
-            star.RemoveStarHead();
+            star.RemoveStar();
         }
+        star.Update();
     }
 }
 

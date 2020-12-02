@@ -31,11 +31,12 @@ class ShootingStar: public Graphic {
 
     const glm::vec2& GetPosition() const;
 
-    void RemoveStarHead();
-
-    bool GetIsHeadStar();
-
-    void SetIsHeadStar(bool is_head_star);
+    /**
+     * Removes star at the last position sets is_disappearing
+     * to true, which stops the star from updating its position,
+     * drawing, its head, or checking its boundaries.
+     */
+    void RemoveStar();
 
  private:
     static constexpr size_t kMoveByXPixels = 1;
@@ -52,11 +53,11 @@ class ShootingStar: public Graphic {
     // star is initialized
     ci::Color color_;
     float trajectory_angle_;
+    bool is_disappearing;
 
     ci::Timer timer;
     // past positions of star used to draw tail of shooting star
     std::vector<glm::vec2> past_positions_;
-    bool is_head_star_;
 
     /**
      * Draws single circle representing a star. The head star will be

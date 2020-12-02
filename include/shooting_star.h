@@ -37,7 +37,7 @@ class ShootingStar: public Graphic {
      * to true, which stops the star from updating its position,
      * drawing, its head, or checking its boundaries.
      */
-    void Disappear_Behind_Boundary();
+    void DisappearProgressively();
 
     /**
      * Returns when past_positions_ is empty, which is when the star

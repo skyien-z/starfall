@@ -19,7 +19,7 @@ void Canvas::Update() {
         // Shortens star if star touches boundary and deletes star
         // when star is hidden from view
         if (IsStarDisappearing(star)) {
-            star.Disappear_Behind_Boundary();
+            star.DisappearProgressively();
             std::remove_if(star_list_.begin(),
                            star_list_.end(), HasStarDisappeared);
             break;
@@ -47,6 +47,9 @@ bool Canvas::IsStarDisappearing(const ShootingStar& star) const {
     return false;
 }
 
+bool Canvas::HasStarDisappeared(const ShootingStar& star){
+    return star.HasDisappeared();
+}
 void Canvas::AddStarToList(const ShootingStar& star) {
     star_list_.push_back(star);
 }
@@ -54,9 +57,4 @@ void Canvas::AddStarToList(const ShootingStar& star) {
 const std::vector<ShootingStar> &Canvas::GetStarList() {
     return star_list_;
 }
-
-bool Canvas::HasStarDisappeared(const ShootingStar& star){
-    return star.HasDisappeared();
-}
-
 }

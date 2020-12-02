@@ -62,7 +62,7 @@ bool ShootingStar::DoesStarTouchPoint(const glm::vec2 &point_on_graph) const {
     return length(position_ - point_on_graph) <= star_head_radius_;
 }
 
-void ShootingStar::Disappear_Behind_Boundary() {
+void ShootingStar::DisappearProgressively() {
     is_disappearing = true;
     past_positions_.erase(past_positions_.begin());
 }

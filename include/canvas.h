@@ -40,7 +40,7 @@ class Canvas: public Graphic {
   private:
     std::vector<ShootingStar> star_list_;
 
-    // Contains list of positions that create the mountain boundary
+    // Contains list of positions that creates the mountain boundary
     std::vector<glm::vec2> boundary_points_;
 
     static bool HasStarDisappeared(const ShootingStar &star);

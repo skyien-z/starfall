@@ -14,7 +14,7 @@ class Canvas: public Graphic {
      */
     Canvas();
 
-    Canvas(const glm::vec2 &top_left_corner, double canvas_width, double canvas_height);
+    Canvas(const glm::vec2 &top_left_corner, size_t canvas_width, size_t canvas_height);
 
     /**
      * Renders all shooting stars in the canvas.

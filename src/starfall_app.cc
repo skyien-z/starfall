@@ -22,7 +22,7 @@ void StarfallApp::setup() {
                   background_image_->getHeight());
 
     // Conform canvas size to image specifications
-    Canvas this_canvas(getWindowPos(), getWindowWidth(),getWindowHeight());
+    Canvas this_canvas(glm::vec2(0, 0), getWindowWidth(),getWindowHeight());
     canvas_ = this_canvas;
 }
 

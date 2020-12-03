@@ -56,6 +56,31 @@ bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar& star) const {
 //        }
 //    }
 
+    // Get the lowest and highest x values of the star head
+    int star_lowest_x = star.GetPosition().x - star.GetStarHeadRadius();
+    int star_highest_x = star.GetPosition().x + star.GetStarHeadRadius();
+
+    for (int x_value = star_lowest_x; x_value <star_highest_x; x_value++) {
+        std::vector<int> list_of_y_values;
+        try {
+            // An out of range exception is thrown if there is no boundary
+            // x_value point with the given x value
+            list_of_y_values = boundary_points_1.at(x_value);
+        }
+        catch (const std::out_of_range& e) {
+            // star does not disappear
+            return false;
+        }
+
+        // loop through all points of boundary that have given x value
+        // and return true if star touches any boundary point.
+        for (int y_value: list_of_y_values) {
+            if (star.DoesStarTouchPoint(x_value, y_value)) {
+                return true;
+            }
+        }
+    }
+
     return false;
 }
 

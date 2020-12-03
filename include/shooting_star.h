@@ -47,8 +47,6 @@ class ShootingStar: public Graphic {
     bool DoesStarTailHaveCoordinateValue(float coordinate_value,
                                          bool is_x_coordinate) const;
 
-    const glm::vec2& GetPosition() const;
-
     /**
      * Removes star at the last position from past positions list,
      * sets is_disappearing to true, which stops the star from
@@ -64,9 +62,13 @@ class ShootingStar: public Graphic {
      */
     bool HasDisappeared() const;
 
+    const glm::vec2& GetPosition() const;
+
+    size_t GetStarHeadRadius() const;
+
  private:
     static constexpr size_t kMoveByXPixels = 2;
-    static constexpr float star_head_radius_ = 2;
+    static constexpr size_t star_head_radius_ = 2;
 
     // Star tail length in pixels is
     // (star_head_radius_/2) * tail_length_proportion_

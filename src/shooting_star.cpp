@@ -107,5 +107,9 @@ bool ShootingStar::HasDisappeared() const{
     return past_positions_.empty();
 }
 
+size_t ShootingStar::GetStarHeadRadius() const {
+    return star_head_radius_;
+}
+
 }
 

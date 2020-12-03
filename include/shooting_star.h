@@ -35,6 +35,8 @@ class ShootingStar: public Graphic {
      */
     bool DoesStarTouchPoint(float x_value, float y_value) const;
 
+    bool DoesStarTouchPoint(const glm::vec2& point) const;
+
     /**
      * Checks if last tail star (the first star in past_positions) has
      * either its x or y value (depending on the passed in boolean) is
@@ -65,6 +67,8 @@ class ShootingStar: public Graphic {
     bool IsDisappearing() const;
 
     const glm::vec2& GetPosition() const;
+
+    size_t GetStarHeadRadius() const;
 
     /**
      * Returns point on star head circumference in that is

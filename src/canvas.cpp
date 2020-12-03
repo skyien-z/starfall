@@ -54,21 +54,26 @@ bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
         return true;
     }
 
-    glm::vec2 potential_collision_point = star.GetPotentialCollisionPoint();
-    // checks if boundary drawn contains any point with x value
-    // of potential star collision point; returns false if not
-    if (boundary_points_[potential_collision_point.x].empty()) {
-        return false;
-    }
+    // Get the lowest and highest x values of the star head
+    int star_lowest_x = star.GetPosition().x - star.GetStarHeadRadius();
+    int star_highest_x = star.GetPosition().x + star.GetStarHeadRadius();
 
-    // gets vector of boundary y values with given boundary x value
-    std::vector<int> list_of_y_values = boundary_points_[potential_collision_point.x];
+    // loops through x values of star head and checks if boundary points
+    // with the same x values are within radius of the star head center.
+    for (int x_value = star_lowest_x; x_value < star_highest_x + 1; x_value++) {
+        if (boundary_points_[x_value].empty()) {
+            continue;
+        }
 
-    // loop through all points of boundary that have given x value
-    // and return true if star touches any boundary point.
-    for (int y_value: list_of_y_values) {
-        if (star.DoesStarTouchPoint(potential_collision_point.x , y_value)) {
-            return true;
+        // gets vector of boundary y values with given boundary x value
+        std::vector<int> list_of_y_values = boundary_points_[x_value];
+
+        // loop through all points of boundary that have given x value
+        // and return true if star touches any boundary point.
+        for (int y_value: list_of_y_values) {
+            if (star.DoesStarTouchPoint(x_value, y_value)) {
+                return true;
+            }
         }
     }
     return false;

@@ -86,6 +86,11 @@ bool ShootingStar::DoesStarTouchPoint(float x_value, float y_value) const {
     return distance_between_points <= star_head_radius_;
 }
 
+bool ShootingStar::DoesStarTouchPoint(const glm::vec2& point) const {
+    return length(position_ - point) <= star_head_radius_;
+}
+
+
 bool ShootingStar::DoesStarTailHaveCoordinateValue(float coordinate_value,
                                                    bool is_x_coordinate) const {
     return (is_x_coordinate && abs(past_positions_.front().x - coordinate_value) <= star_head_radius_) ||
@@ -103,6 +108,10 @@ const glm::vec2 &ShootingStar::GetPosition() const {
 
 bool ShootingStar::HasDisappeared() const{
     return past_positions_.empty();
+}
+
+size_t ShootingStar::GetStarHeadRadius() const {
+    return star_head_radius_;
 }
 
 glm::vec2 ShootingStar::GetPotentialCollisionPoint() const {

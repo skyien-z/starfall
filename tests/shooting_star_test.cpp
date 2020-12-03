@@ -69,6 +69,14 @@ TEST_CASE("Update Star Position") {
         star.Update();
         REQUIRE(star.GetPosition() == glm::vec2(50, 50 + kMoveByX));
     }
+
+    SECTION("Undefined Slope (from viewing perspective); star heads directly up") {
+        // radius of all stars is 2
+        ShootingStar star(glm::vec2(50, 50),
+                          ci::Color(0, 255, 0), M_PI / 2);
+        star.Update();
+        REQUIRE(star.GetPosition() == glm::vec2(50, 50 - kMoveByX));
+    }
 }
 
 TEST_CASE("Star Disappear Progressively") {

@@ -42,15 +42,16 @@ void ShootingStar::Update() {
 void ShootingStar::UpdatePosition() {
     // As cinder graphically flips Q1 and Q2 with Q3 and Q4, decreases
     // x position when trajectory is between -Pi/2 and -3 Pi/2
-    if (trajectory_angle_ > M_PI/2 && trajectory_angle_ < 3 * M_PI/2) {
-        position_.x = position_.x - kMoveByXPixels;
-        position_.y = position_.y - std::tan(trajectory_angle_) * kMoveByXPixels;
-    } else if (trajectory_angle_ - M_PI/2 < 0.0001) { // tan(Pi/2) is undefined
+
+    if (abs(trajectory_angle_ - M_PI/2) < 0.0001) { // tan(Pi/2) is undefined
         // x position remains the same
         position_.y = position_.y -  kMoveByXPixels;
-    } else if (trajectory_angle_ - 3*M_PI/2 < 0.0001) { // tan(3 Pi/2) is undefined
+    } else if (abs(trajectory_angle_ - 3*M_PI/2) < 0.0001) { // tan(3 Pi/2) is undefined
         // x position remains the same
-        position_.y = position_.y +  kMoveByXPixels;
+        position_.y = position_.y + kMoveByXPixels;
+    } else if (trajectory_angle_ > M_PI/2 && trajectory_angle_ < 3 * M_PI/2) {
+        position_.x = position_.x - kMoveByXPixels;
+        position_.y = position_.y - std::tan(trajectory_angle_) * kMoveByXPixels;
     } else {
         position_.x = kMoveByXPixels + position_.x;
         position_.y = std::tan(trajectory_angle_) * kMoveByXPixels + position_.y;

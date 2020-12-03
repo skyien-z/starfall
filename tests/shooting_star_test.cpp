@@ -14,18 +14,15 @@ TEST_CASE("Does Star Touch Point") {
                       ci::Color(0, 255, 0), M_PI / 4);
 
     SECTION("Horizontal Position Difference; touch on edge of star") {
-        glm::vec2 test_position(52, 50);
-        REQUIRE(star.DoesStarTouchPoint(test_position));
+        REQUIRE(star.DoesStarTouchPoint(52, 50));
     }
 
     SECTION("Vertical Position Difference; touch on edge of star") {
-        glm::vec2 test_position(50, 52);
-        REQUIRE(star.DoesStarTouchPoint(test_position));
+        REQUIRE(star.DoesStarTouchPoint(50, 52));
     }
 
     SECTION("Diagonal Position Difference; touch on interior of star") {
-        glm::vec2 test_position(51, 51);
-        REQUIRE(star.DoesStarTouchPoint(test_position));
+        REQUIRE(star.DoesStarTouchPoint(51, 51));
     }
 }
 

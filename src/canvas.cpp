@@ -50,11 +50,11 @@ void Canvas::RemoveBoundaries() {
 }
 
 bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar& star) const {
-    for (const glm::vec2& boundary_point: boundary_points_) {
-        if (star.DoesStarTouchPoint(boundary_point)) {
-            return true;
-        }
-    }
+//    for (const glm::vec2& boundary_point: boundary_points_) {
+//        if (star.DoesStarTouchPoint(boundary_point, 0)) {
+//            return true;
+//        }
+//    }
 
     return false;
 }

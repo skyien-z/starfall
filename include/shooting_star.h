@@ -29,10 +29,11 @@ class ShootingStar: public Graphic {
     /**
      * Checks if star head touches point given.
      *
-     * @param point_on_graph to check for star head contact
+     * @param x_value of point to check for star head contact
+     * @param y_value of point to check for star head contact
      * @return true if star head touches point; false otherwise
      */
-    bool DoesStarTouchPoint(const glm::vec2& point_on_graph) const;
+    bool DoesStarTouchPoint(float x_value, float y_value) const;
 
     /**
      * Checks if last tail star (the first star in past_positions) has
@@ -98,6 +99,5 @@ class ShootingStar: public Graphic {
      * Changes current position according to y = m x + b; m = tan(y) where y is in radians
      */
     void UpdatePosition();
-
 };
 }

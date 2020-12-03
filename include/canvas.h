@@ -75,12 +75,9 @@ class Canvas: public Graphic {
 
     std::vector<ShootingStar> star_list_;
 
-    // Contains list of positions that creates the mountain boundary
-    std::vector<glm::vec2> boundary_points_;
-
     // keys are x values of boundary points while the value is a vector
     // of y values that correspond to the x value key
-    MapXToYList boundary_points_1;
+    MapXToYList boundary_points_;
 
     /**
      * Checks if given star has left the bounds of the canvas.

@@ -38,11 +38,11 @@ void Canvas::Update() {
 }
 
 void Canvas::AddPointToBoundaries(const glm::vec2 &boundary_point) {
-    boundary_points_.push_back(boundary_point);
+    //boundary_points_.push_back(boundary_point);
 
     // if x value key doesn't exist, [] creates key and adds y value to
     // vector of y values. If key exists, just add y value to y value list.
-    boundary_points_1[boundary_point.x].push_back(boundary_point.y);
+    boundary_points_[boundary_point.x].push_back(boundary_point.y);
 }
 
 void Canvas::RemoveBoundaries() {
@@ -60,17 +60,13 @@ bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar& star) const {
     int star_lowest_x = star.GetPosition().x - star.GetStarHeadRadius();
     int star_highest_x = star.GetPosition().x + star.GetStarHeadRadius();
 
-    for (int x_value = star_lowest_x; x_value <star_highest_x; x_value++) {
-        std::vector<int> list_of_y_values;
-        try {
-            // An out of range exception is thrown if there is no boundary
-            // x_value point with the given x value
-            list_of_y_values = boundary_points_1.at(x_value);
+    for (int x_value = star_lowest_x; x_value < star_highest_x + 1; x_value++) {
+        auto x_key_it = boundary_points_.find(x_value);
+        if (x_key_it == boundary_points_.end()) {
+            continue;
         }
-        catch (const std::out_of_range& e) {
-            // star does not disappear
-            return false;
-        }
+
+        std::vector<int> list_of_y_values = x_key_it->second;
 
         // loop through all points of boundary that have given x value
         // and return true if star touches any boundary point.

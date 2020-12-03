@@ -49,31 +49,31 @@ namespace starfall {
         boundary_points_.clear();
     }
 
-    bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
-        if (star.IsDisappearing()) {
+bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
+    if (star.IsDisappearing()) {
+        return true;
+    }
+
+    glm::vec2 potential_collision_point = star.GetPotentialCollisionPoint();
+    // checks if boundary drawn contains any point with x value
+    // of potential star collision point; returns false if not
+    if (boundary_points_[potential_collision_point.x].empty()) {
+        return false;
+    }
+
+    // gets vector of boundary y values with given boundary x value
+    std::vector<int> list_of_y_values = boundary_points_[potential_collision_point.x];
+
+    // loop through all points of boundary that have given x value
+    // and return true if star touches any boundary point.
+    for (int y_value: list_of_y_values) {
+        if (star.DoesStarTouchPoint(potential_collision_point.x , y_value)) {
             return true;
         }
-
-        glm::vec2 potential_collision_point = star.GetPotentialCollisionPoint();
-        // checks if boundary drawn contains any point with x value
-        // of potential star collision point; returns false if not
-        if (boundary_points_[potential_collision_point.x].empty()) {
-            return false;
-        }
-
-        // gets vector of boundary y values with given boundary x value
-        std::vector<int> list_of_y_values = boundary_points_[potential_collision_point.x];
-
-        // loop through all points of boundary that have given x value
-        // and return true if star touches any boundary point.
-        for (int y_value: list_of_y_values) {
-            if (star.DoesStarTouchPoint(potential_collision_point.x , y_value)) {
-                return true;
-            }
-        }
-
-        return false;
+    }
+    return false;
 }
+
 
 bool Canvas::IsStarOutOfBounds(const ShootingStar &star) const {
     return star.DoesStarTailHaveCoordinateValue(top_bound_, false) ||

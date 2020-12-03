@@ -72,12 +72,12 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
     canvas_.RemoveBoundaries();
     break;
   case ci::app::KeyEvent::KEY_RIGHT:
-      // Goes clockwise around the canvas
-      (current_trajectory_key_ == 7) ? current_trajectory_key_ = 0 : current_trajectory_key_++;
-      break;
-  case ci::app::KeyEvent::KEY_LEFT:
       // Goes counterclockwise around the canvas
       (current_trajectory_key_ == 0) ? current_trajectory_key_ = 7 : current_trajectory_key_--;
+      break;
+  case ci::app::KeyEvent::KEY_LEFT:
+      // Goes clockwise around the canvas
+      (current_trajectory_key_ == 7) ? current_trajectory_key_ = 0 : current_trajectory_key_++;
       break;
   }
 

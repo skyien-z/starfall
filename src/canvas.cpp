@@ -50,6 +50,8 @@ namespace starfall {
     }
 
 bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
+    // IsDisappearing is set to true the first time
+    // DisappearProgressively() is called
     if (star.IsDisappearing()) {
         return true;
     }

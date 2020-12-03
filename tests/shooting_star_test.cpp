@@ -30,7 +30,7 @@ TEST_CASE("Does Star Touch Point") {
 }
 
 TEST_CASE("Update Star Position") {
-    SECTION("Negative Slope (from viewing perspective); star heads right") {
+    SECTION("Negative Slope (from viewing perspective); star heads right and down") {
         // radius of all stars is 2
         ShootingStar star(glm::vec2(50, 50),
                           ci::Color(0, 255, 0), M_PI / 4);
@@ -38,12 +38,28 @@ TEST_CASE("Update Star Position") {
         REQUIRE(star.GetPosition() == glm::vec2(50 + kMoveByX, 50 + kMoveByX));
     }
 
-    SECTION("Positive Slope (from viewing perspective); star heads left") {
+    SECTION("Positive Slope (from viewing perspective); star heads left and down") {
         // radius of all stars is 2
         ShootingStar star(glm::vec2(50, 50),
-                          ci::Color(0, 255, 0), -5 * M_PI / 4);
+                          ci::Color(0, 255, 0), 3*M_PI / 4);
+        star.Update();
+        REQUIRE(star.GetPosition() == glm::vec2(50 - kMoveByX, 50 + kMoveByX));
+    }
+
+    SECTION("Negative Slope (from viewing perspective); star heads left and up") {
+        // radius of all stars is 2
+        ShootingStar star(glm::vec2(50, 50),
+                          ci::Color(0, 255, 0), 5 * M_PI / 4);
         star.Update();
         REQUIRE(star.GetPosition() == glm::vec2(50 - kMoveByX, 50 - kMoveByX));
+    }
+
+    SECTION("Positive Slope (from viewing perspective); star heads right and up") {
+        // radius of all stars is 2
+        ShootingStar star(glm::vec2(50, 50),
+                          ci::Color(0, 255, 0), 7 * M_PI / 4);
+        star.Update();
+        REQUIRE(star.GetPosition() == glm::vec2(50 + kMoveByX, 50 - kMoveByX));
     }
 }
 

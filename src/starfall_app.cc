@@ -4,7 +4,7 @@ namespace starfall {
 
 StarfallApp::StarfallApp() {
     current_color_ = ci::Color(0, 255, 0);
-    current_trajectory_ = M_PI / 4;
+    current_trajectory_ = kDefaultTrajectory;
 }
 
 void StarfallApp::draw() {
@@ -43,9 +43,15 @@ void StarfallApp::mouseDrag(ci::app::MouseEvent event) {
 }
 
 void StarfallApp::mouseWheel(ci::app::MouseEvent event) {
-    // each wheel increment up increases trajectory by Pi/5
-    // while each wheel increment down decreases trajectory by Pi/5
-    current_trajectory_ = event.getWheelIncrement() + M_PI/6;
+    // To prevent tan(trajectory) from being undefined, and to have
+    // it rendered nicely, keep the trajectory between -Pi/3 to Pi/3
+    if (tan(current_trajectory_) < -M_PI/3 || tan(current_trajectory_) > M_PI/3) {
+        current_trajectory_ = kDefaultTrajectory;
+    }
+
+    // each wheel increment up increases trajectory by Pi/6
+    // while each wheel increment down decreases trajectory by Pi/6
+    current_trajectory_ = event.getWheelIncrement() + M_PI/4;
 }
 
 void StarfallApp::keyDown(ci::app::KeyEvent event) {

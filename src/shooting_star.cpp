@@ -45,10 +45,10 @@ void ShootingStar::UpdatePosition() {
     if (trajectory_angle_ > M_PI/2 && trajectory_angle_ < 3 * M_PI/2) {
         position_.x = position_.x - kMoveByXPixels;
         position_.y = position_.y - std::tan(trajectory_angle_) * kMoveByXPixels;
-    } else if (trajectory_angle_ == M_PI/2) { // tan(Pi/2) is undefined
+    } else if (trajectory_angle_ - M_PI/2 < 0.0001) { // tan(Pi/2) is undefined
         // x position remains the same
         position_.y = position_.y -  kMoveByXPixels;
-    } else if (trajectory_angle_ == 3*M_PI/2) { // tan(3 Pi/2) is undefined
+    } else if (trajectory_angle_ - 3*M_PI/2 < 0.0001) { // tan(3 Pi/2) is undefined
         // x position remains the same
         position_.y = position_.y +  kMoveByXPixels;
     } else {

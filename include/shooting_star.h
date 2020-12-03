@@ -99,6 +99,5 @@ class ShootingStar: public Graphic {
      */
     void UpdatePosition();
 
-    void Initialize_Variables(const glm::vec2& starting_position);
 };
 }

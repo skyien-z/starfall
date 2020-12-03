@@ -8,10 +8,6 @@ ShootingStar::ShootingStar(const glm::vec2& starting_position,
                            position_(starting_position),
                            color_(color),
                            trajectory_angle_(trajectory_angle) {
-    Initialize_Variables(starting_position);
-}
-
-void ShootingStar::Initialize_Variables(const glm::vec2& starting_position) {
     timer.start();
 
     // Each star only shoots once so adds first position to past_positions_

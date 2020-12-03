@@ -59,7 +59,7 @@ TEST_CASE("Update Star Position") {
         ShootingStar star(glm::vec2(50, 50),
                           ci::Color(0, 255, 0), 7 * M_PI / 4);
         star.Update();
-        REQUIRE(star.GetPosition() == glm::vec2(50 + kMoveByX, 50 - kMoveByX));
+        REQUIRE(star.GetPosition() == glm::vec2(50 + kMoveByX, 50 + kMoveByX));
     }
 
     SECTION("Undefined Slope (from viewing perspective); star heads directly down") {
@@ -67,7 +67,7 @@ TEST_CASE("Update Star Position") {
         ShootingStar star(glm::vec2(50, 50),
                           ci::Color(0, 255, 0), 3 * M_PI / 2);
         star.Update();
-        REQUIRE(star.GetPosition() == glm::vec2(50, 50 + kMoveByX));
+        REQUIRE(star.GetPosition() == glm::vec2(50, 50 - kMoveByX));
     }
 
     SECTION("Undefined Slope (from viewing perspective); star heads directly up") {

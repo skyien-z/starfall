@@ -12,9 +12,9 @@ StarfallApp::StarfallApp() {
             {2, M_PI/2},
             {3, 3*M_PI/4},
             {4, M_PI},
-            {5, 7*M_PI/4},
+            {5, 5*M_PI/4},
             {6, 3*M_PI/2},
-            {7, 5*M_PI/4}
+            {7, 7*M_PI/4}
     };
 }
 
@@ -72,9 +72,11 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
     canvas_.RemoveBoundaries();
     break;
   case ci::app::KeyEvent::KEY_RIGHT:
+      // Goes clockwise around the canvas
       (current_trajectory_key_ == 7) ? current_trajectory_key_ = 0 : current_trajectory_key_++;
       break;
   case ci::app::KeyEvent::KEY_LEFT:
+      // Goes counterclockwise around the canvas
       (current_trajectory_key_ == 0) ? current_trajectory_key_ = 7 : current_trajectory_key_--;
       break;
   }

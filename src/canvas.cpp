@@ -30,7 +30,6 @@ namespace starfall {
                 }
             } else if (IsStarDisappearingBehindBoundary(star_list_[i])) {
                 star_list_[i].DisappearProgressively();
-                break;
             }
 
             star_list_[i].Update(); // Will not change star position if star touches boundaries
@@ -51,8 +50,11 @@ namespace starfall {
     }
 
     bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
-        glm::vec2 potential_collision_point = star.GetPotentialCollisionPoint();
+        if (star.IsDisappearing()) {
+            return true;
+        }
 
+        glm::vec2 potential_collision_point = star.GetPotentialCollisionPoint();
         // checks if boundary drawn contains any point with x value
         // of potential star collision point; returns false if not
         if (boundary_points_[potential_collision_point.x].empty()) {

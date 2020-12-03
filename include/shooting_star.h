@@ -64,6 +64,8 @@ class ShootingStar: public Graphic {
      */
     bool HasDisappeared() const;
 
+    bool IsDisappearing() const;
+
     const glm::vec2& GetPosition() const;
 
     size_t GetStarHeadRadius() const;

@@ -119,5 +119,9 @@ glm::vec2 ShootingStar::GetPotentialCollisionPoint() const {
                                  star_head_radius_ * sin(trajectory_angle_));
 }
 
+bool ShootingStar::IsDisappearing() const {
+    return is_disappearing;
+}
+
 }
 

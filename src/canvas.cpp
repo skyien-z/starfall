@@ -2,82 +2,75 @@
 
 namespace starfall {
 
-Canvas::Canvas() {}
+    Canvas::Canvas() {}
 
-Canvas::Canvas(const glm::vec2 &top_left_corner, size_t canvas_width, size_t canvas_height) {
-    top_bound_ = top_left_corner.y;
-    bottom_bound_ = top_bound_ + canvas_height;
+    Canvas::Canvas(const glm::vec2 &top_left_corner, size_t canvas_width, size_t canvas_height) {
+        top_bound_ = top_left_corner.y;
+        bottom_bound_ = top_bound_ + canvas_height;
 
-    left_bound_ = top_left_corner.x;
-    right_bound_ = left_bound_ + canvas_width;
-}
-
-void Canvas::Draw() const {
-    for (const auto &star: star_list_) {
-        star.Draw();
+        left_bound_ = top_left_corner.x;
+        right_bound_ = left_bound_ + canvas_width;
     }
-}
 
-void Canvas::Update() {
-    for (size_t i = 0; i < star_list_.size(); i++) {
-        // Shortens star if star touches boundary and deletes star
-        // when star is hidden from view
-        if (star_list_[i].HasDisappeared() || IsStarOutOfBounds(star_list_[i])) {
-            auto star_to_remove_it = star_list_.begin() + i;
-            if (star_to_remove_it != star_list_.end()) {
-                star_list_.erase(star_to_remove_it);
+    void Canvas::Draw() const {
+        for (const auto &star: star_list_) {
+            star.Draw();
+        }
+    }
+
+    void Canvas::Update() {
+        for (size_t i = 0; i < star_list_.size(); i++) {
+            // Shortens star if star touches boundary and deletes star
+            // when star is hidden from view
+            if (star_list_[i].HasDisappeared() || IsStarOutOfBounds(star_list_[i])) {
+                auto star_to_remove_it = star_list_.begin() + i;
+                if (star_to_remove_it != star_list_.end()) {
+                    star_list_.erase(star_to_remove_it);
+                    break;
+                }
+            } else if (IsStarDisappearingBehindBoundary(star_list_[i])) {
+                star_list_[i].DisappearProgressively();
                 break;
             }
-        } else if (IsStarDisappearingBehindBoundary(star_list_[i])) {
-            star_list_[i].DisappearProgressively();
-            break;
-        }
 
-        star_list_[i].Update(); // Will not change star position if star touches boundaries
+            star_list_[i].Update(); // Will not change star position if star touches boundaries
+        }
     }
-}
 
-void Canvas::AddPointToBoundaries(const glm::vec2 &boundary_point) {
-    //boundary_points_.push_back(boundary_point);
+    void Canvas::AddPointToBoundaries(const glm::vec2 &boundary_point) {
+        //boundary_points_.push_back(boundary_point);
 
-    // if x value key doesn't exist, [] creates key and adds y value to
-    // vector of y values. If key exists, just add y value to y value list.
-    boundary_points_[boundary_point.x].push_back(boundary_point.y);
-}
+        // if x value key doesn't exist, [] creates key and adds y value to
+        // vector of y values. If key exists, just add y value to y value list.
+        boundary_points_[boundary_point.x].push_back(boundary_point.y);
 
-void Canvas::RemoveBoundaries() {
-    boundary_points_.clear();
-}
+    }
 
-bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar& star) const {
-//    for (const glm::vec2& boundary_point: boundary_points_) {
-//        if (star.DoesStarTouchPoint(boundary_point, 0)) {
-//            return true;
-//        }
-//    }
+    void Canvas::RemoveBoundaries() {
+        boundary_points_.clear();
+    }
 
-    // Get the lowest and highest x values of the star head
-    int star_lowest_x = star.GetPosition().x - star.GetStarHeadRadius();
-    int star_highest_x = star.GetPosition().x + star.GetStarHeadRadius();
+    bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
+        glm::vec2 potential_collision_point = star.GetPotentialCollisionPoint();
 
-    for (int x_value = star_lowest_x; x_value < star_highest_x + 1; x_value++) {
-        auto x_key_it = boundary_points_.find(x_value);
-        if (x_key_it == boundary_points_.end()) {
-            continue;
+        // checks if boundary drawn contains any point with x value
+        // of potential star collision point; returns false if not
+        if (boundary_points_[potential_collision_point.x].empty()) {
+            return false;
         }
 
-        std::vector<int> list_of_y_values = x_key_it->second;
+        // gets vector of boundary y values with given boundary x value
+        std::vector<int> list_of_y_values = boundary_points_[potential_collision_point.x];
 
         // loop through all points of boundary that have given x value
         // and return true if star touches any boundary point.
         for (int y_value: list_of_y_values) {
-            if (star.DoesStarTouchPoint(x_value, y_value)) {
+            if (star.DoesStarTouchPoint(potential_collision_point.x , y_value)) {
                 return true;
             }
         }
-    }
 
-    return false;
+        return false;
 }
 
 bool Canvas::IsStarOutOfBounds(const ShootingStar &star) const {

@@ -55,7 +55,7 @@ class Canvas: public Graphic {
      * @return true if star is at boundary or in the process of disappearing;
      * false if star has disappeared or has not started disappearing.
      */
-    bool IsStarDisappearingBehindBoundary(const ShootingStar& star) const;
+    bool IsStarDisappearingBehindBoundary(const ShootingStar& star);
 
     /**
      * Clears vector that holds boundary points.
@@ -77,7 +77,7 @@ class Canvas: public Graphic {
 
     // keys are x values of boundary points while the value is a vector
     // of y values that correspond to the x value key
-    MapXToYList boundary_points_;
+    std::unordered_map<int, std::vector<int>> boundary_points_;
 
     /**
      * Checks if given star has left the bounds of the canvas.

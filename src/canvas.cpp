@@ -39,6 +39,10 @@ void Canvas::Update() {
 
 void Canvas::AddPointToBoundaries(const glm::vec2 &boundary_point) {
     boundary_points_.push_back(boundary_point);
+
+    // if x value key doesn't exist, [] creates key and adds y value to
+    // vector of y values. If key exists, just add y value to y value list.
+    boundary_points_1[boundary_point.x].push_back(boundary_point.y);
 }
 
 void Canvas::RemoveBoundaries() {

@@ -88,3 +88,9 @@ TEST_CASE("Test Deleting Star After Star Falls Out of Bounds") {
         REQUIRE(test_canvas.GetStarList().empty());
     }
 }
+
+TEST_CASE("Add Point to Boundary Map") {
+    Canvas test_canvas(glm::vec2(50, 50),
+                       200, 200);
+    test_canvas.AddPointToBoundaries(glm::vec2(55, 55));
+}

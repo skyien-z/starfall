@@ -4,6 +4,8 @@
 
 namespace starfall {
 
+typedef std::unordered_map<int, std::vector<int>> MapXToYList;
+
 /**
  * Creates canvas that handles rendering all shooting stars
  */
@@ -75,6 +77,10 @@ class Canvas: public Graphic {
 
     // Contains list of positions that creates the mountain boundary
     std::vector<glm::vec2> boundary_points_;
+
+    // keys are x values of boundary points while the value is a vector
+    // of y values that correspond to the x value key
+    MapXToYList boundary_points_1;
 
     /**
      * Checks if given star has left the bounds of the canvas.

@@ -23,7 +23,6 @@ class StarfallApp : public ci::app::App {
   void draw() override;
   void update() override;
 
-  void mouseWheel(ci::app::MouseEvent event) override;
   void mouseDown(ci::app::MouseEvent event) override;
   void mouseDrag(ci::app::MouseEvent event) override;
   void keyDown(ci::app::KeyEvent event) override;
@@ -32,12 +31,17 @@ class StarfallApp : public ci::app::App {
   static constexpr double kMargin = 50;
 
  private:
-    static constexpr float kDefaultTrajectory = -7*M_PI/4;
+    static constexpr float kDefaultTrajectory = M_PI/4;
+
+    // A formalized map of possible trajectories to launch star from
+    std::unordered_map<int, double> trajectory_selection_;
 
     Canvas canvas_;
     ci::gl::Texture2dRef background_image_;
     ci::Color current_color_;
-    float current_trajectory_;
+
+    // Key value of current trajectory value set
+    float current_trajectory_key_;
 };
 
 }  // namespace ideal_gas

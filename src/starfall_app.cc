@@ -4,7 +4,18 @@ namespace starfall {
 
 StarfallApp::StarfallApp() {
     current_color_ = ci::Color(0, 255, 0);
-    current_trajectory_ = kDefaultTrajectory;
+    current_trajectory_key_ = 1;
+
+    trajectory_selection_ = {
+            {0, 0},
+            {1, M_PI/4},
+            {2, M_PI/2},
+            {3, 3*M_PI/4},
+            {4, M_PI},
+            {5, 7*M_PI/4},
+            {6, 3*M_PI/2},
+            {7, 5*M_PI/4}
+    };
 }
 
 void StarfallApp::draw() {
@@ -32,7 +43,8 @@ void StarfallApp::update() {
 
 void StarfallApp::mouseDown(ci::app::MouseEvent event) {
     if (event.isRightDown()) {
-        canvas_.AddStarToList(event.getPos(), current_color_, current_trajectory_);
+        canvas_.AddStarToList(event.getPos(), current_color_,
+                              trajectory_selection_[current_trajectory_key_]);
     }
 }
 
@@ -40,18 +52,6 @@ void StarfallApp::mouseDrag(ci::app::MouseEvent event) {
     if (event.isShiftDown()) {
         canvas_.AddPointToBoundaries(event.getPos());
     }
-}
-
-void StarfallApp::mouseWheel(ci::app::MouseEvent event) {
-    // To prevent tan(trajectory) from being undefined, and to have
-    // it rendered nicely, keep the trajectory between -Pi/3 to Pi/3
-    if (tan(current_trajectory_) < -M_PI/3 || tan(current_trajectory_) > M_PI/3) {
-        current_trajectory_ = kDefaultTrajectory;
-    }
-
-    // each wheel increment up increases trajectory by Pi/6
-    // while each wheel increment down decreases trajectory by Pi/6
-    current_trajectory_ = event.getWheelIncrement() + M_PI/4;
 }
 
 void StarfallApp::keyDown(ci::app::KeyEvent event) {
@@ -68,10 +68,17 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
   case ci::app::KeyEvent::KEY_o:
       current_color_ = ci::Color(255, 128, 0);
       break;
-    case ci::app::KeyEvent::KEY_DELETE:
-        canvas_.RemoveBoundaries();
+  case ci::app::KeyEvent::KEY_TAB:
+    canvas_.RemoveBoundaries();
+    break;
+  case ci::app::KeyEvent::KEY_RIGHT:
+      (current_trajectory_key_ == 7) ? current_trajectory_key_ = 0 : current_trajectory_key_++;
+      break;
+  case ci::app::KeyEvent::KEY_LEFT:
+      (current_trajectory_key_ == 0) ? current_trajectory_key_ = 7 : current_trajectory_key_--;
       break;
   }
+
 }
 
 }  // namespace ideal_gas

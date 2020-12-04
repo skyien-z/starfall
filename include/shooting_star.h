@@ -112,7 +112,9 @@ class ShootingStar: public Graphic {
      * @param star_position pixel position representing where to draw star.
      * @param is_head_star; true if star to be rendered is the "head" star
      */
-    void DrawStar(glm::vec2 star_position, bool is_head_star) const;
+    void DrawStarHead(glm::vec2 star_position) const;
+
+    void DrawStarTail(glm::vec2 star_position) const;
 
     /**
      * Changes current position according to y = m x + b; m = tan(y) where

@@ -27,7 +27,7 @@ void StarfallApp::draw() {
 
 void StarfallApp::setup() {
     auto image = ci::loadImage( "/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
-                                "final-project-skyien-z/images/smaller_mountains.png" );
+                                "final-project-skyien-z/resources/mountains_for_starfall.png" );
     background_image_ = ci::gl::Texture2d::create(image);
     setWindowSize(background_image_->getWidth(),
                   background_image_->getHeight());

@@ -57,25 +57,23 @@ void ShootingStar::UpdatePosition() {
 void ShootingStar::Draw() const {
     // Draws "stars" that aggregate into colored star tail
     for (const glm::vec2& past_position: past_positions_) {
-        DrawStar(past_position, false);
+        DrawStarHead(past_position, false);
     }
 
     // Draws current star head if star is above mountains
     if (!is_disappearing) {
-        DrawStar(position_, true);
+        DrawStarHead(position_, true);
     }
 }
 
-void ShootingStar::DrawStar(glm::vec2 star_position, bool is_head_star) const {
+void ShootingStar::DrawStarHead(glm::vec2 star_position) const {
     // draws tail star
     ci::gl::ScopedColor scpColor(color_);
     ci::gl::drawSolidCircle(star_position, star_radius_);
 
     // draws white star head
-    if (is_head_star) {
-        ci::gl::color(ci::ColorA( 255, 255, 255));
-        ci::gl::drawSolidCircle(star_position, star_radius_);
-    }
+    ci::gl::color(ci::ColorA( 255, 255, 255));
+    ci::gl::drawSolidCircle(star_position, star_radius_);
 }
 
 bool ShootingStar::DoesStarTouchPoint(float x_value, float y_value) const {
@@ -117,6 +115,9 @@ size_t ShootingStar::GetStarRadius() const {
 
 bool ShootingStar::IsDisappearing() const {
     return is_disappearing;
+}
+
+ShootingStar::DrawStarTail(glm::vec2 star_position) const {
 }
 
 }

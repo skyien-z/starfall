@@ -47,6 +47,22 @@ namespace starfall {
     float GetRandomRightAndUpTrajectory();
 
     /**
+     * Returns a random float [5*Pi/3, 7*Pi/3).
+     *
+     * A trajectory that is abs(tan(trajectory)) < 2 will guarantee that
+     * the change in y of a particle will not exceed the change in x.
+     */
+    float GetRandomRightTrajectory();
+
+    /**
+     * Returns a random float [2*Pi/3, 4*Pi/3).
+     *
+     * A trajectory that is abs(tan(trajectory)) < 2 will guarantee that
+     * the change in y of a particle will not exceed the change in x.
+     */
+    float GetRandomLeftTrajectory();
+
+    /**
      * Generate random color based on randomly chosen rgb values
      * @return color as ColorA
      */

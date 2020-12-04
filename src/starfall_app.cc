@@ -7,22 +7,10 @@ StarfallApp::StarfallApp() {
                       "my_projects/final-project-skyien-z/resources/");
 
     current_color_ = ci::Color(0, 255, 0);
-    current_trajectory_key_ = 1;
-
-    trajectory_selection_ = {
-            {0, 0},
-            {1, M_PI/4},
-            {2, M_PI/2},
-            {3, 3*M_PI/4},
-            {4, M_PI},
-            {5, 5*M_PI/4},
-            {6, 3*M_PI/2},
-            {7, 7*M_PI/4}
-    };
+    current_trajectory_ = M_PI/4;
 }
 
 void StarfallApp::draw() {
-//  ci::gl::clear();
     ci::gl::draw(background_image_);
 
     canvas_.Draw();
@@ -56,7 +44,7 @@ void StarfallApp::update() {
 void StarfallApp::mouseDown(ci::app::MouseEvent event) {
     if (event.isRightDown()) {
         canvas_.AddStarToList(event.getPos(), current_color_,
-                              trajectory_selection_[current_trajectory_key_]);
+                              current_trajectory_);
     }
 }
 
@@ -69,7 +57,7 @@ void StarfallApp::mouseDrag(ci::app::MouseEvent event) {
 void StarfallApp::keyDown(ci::app::KeyEvent event) {
   switch (event.getCode()) {
   case ci::app::KeyEvent::KEY_r:
-      current_color_ = ci::Color(255, 0, 0);
+      current_color_ = GetRandomColor();
       break;
   case ci::app::KeyEvent::KEY_g:
       current_color_ = ci::Color(0, 255, 0);
@@ -85,11 +73,11 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
     break;
   case ci::app::KeyEvent::KEY_RIGHT:
       // Goes counterclockwise around the canvas
-      (current_trajectory_key_ == 0) ? current_trajectory_key_ = 7 : current_trajectory_key_--;
+      current_trajectory_ = GetRandomRightTrajectory();
       break;
   case ci::app::KeyEvent::KEY_LEFT:
       // Goes clockwise around the canvas
-      (current_trajectory_key_ == 7) ? current_trajectory_key_ = 0 : current_trajectory_key_++;
+      current_trajectory_ = GetRandomLeftTrajectory();
       break;
   }
 

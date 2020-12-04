@@ -7,6 +7,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/audio/Voice.h"
 #include "canvas.h"
+#include "utils.h"
 
 namespace starfall {
 
@@ -28,20 +29,12 @@ class StarfallApp : public ci::app::App {
     void mouseDrag(ci::app::MouseEvent event) override;
     void keyDown(ci::app::KeyEvent event) override;
 
-    static constexpr double kWindowSize = 700;
-    static constexpr double kMargin = 50;
-
  private:
-    // A formalized map of possible trajectories to launch star from
-    std::unordered_map<int, double> trajectory_selection_;
-
     Canvas canvas_;
 
     ci::gl::Texture2dRef background_image_;
     ci::Color current_color_;
-
-    // Key value of current trajectory value set
-    float current_trajectory_key_;
+    float current_trajectory_;
 };
 
 }  // namespace ideal_gas

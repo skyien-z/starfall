@@ -3,6 +3,9 @@
 namespace starfall {
 
 StarfallApp::StarfallApp() {
+    addAssetDirectory("/Users/user/CLionProjects/cinder_0.9.2_mac/"
+                      "my_projects/final-project-skyien-z/resources/");
+
     current_color_ = ci::Color(0, 255, 0);
     current_trajectory_key_ = 1;
 
@@ -27,7 +30,7 @@ void StarfallApp::draw() {
 
 void StarfallApp::setup() {
     auto image = ci::loadImage( "/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
-                                "final-project-skyien-z/resources/mountains_for_starfall.png" );
+                                "final-project-skyien-z/resources/mountains_for_starfall.png");
     background_image_ = ci::gl::Texture2d::create(image);
     setWindowSize(background_image_->getWidth(),
                   background_image_->getHeight());
@@ -35,6 +38,15 @@ void StarfallApp::setup() {
     // Conform canvas size to image specifications
     Canvas this_canvas(glm::vec2(0, 0), getWindowWidth(),getWindowHeight());
     canvas_ = this_canvas;
+
+    // audio setup
+/*    ci::audio::VoiceRef mVoice;
+    ci::audio::SourceFileRef sourceFile = ci::audio::load(
+            ci::app::loadAsset("aria_de_mezzo.mp3"));
+    mVoice = ci::audio::Voice::create(sourceFile);
+
+    // Start playing audio from the voice:
+    mVoice->start();*/
 }
 
 void StarfallApp::update() {

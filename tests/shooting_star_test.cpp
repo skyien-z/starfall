@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include <vector>
 #include "cinder/gl/gl.h"
-#include "canvas.h"
+#include "shooting_star.h"
 
 using namespace starfall;
 

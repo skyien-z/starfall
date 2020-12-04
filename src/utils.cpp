@@ -5,17 +5,20 @@ namespace starfall {
 
     float GetRandomFloat(float lower_bound, float upper_bound)
     {
-        static std::default_random_engine random_engine;
-        static std::uniform_real_distribution<> distribution(lower_bound, upper_bound);
-        return distribution(random_engine);
+        std::random_device rd;  //Will be used to obtain a seed for the random number engine
+        std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+
+        std::uniform_real_distribution<> distribution(lower_bound, upper_bound);
+        return distribution(gen);
     }
 
     int GetRandomInt(int lower_bound, int upper_bound) {
-        static std::default_random_engine random_engine;
+        std::random_device rd;
+        std::mt19937 generator(rd());
 
         // upper_bound + 1 makes the distribution inclusive to the bounds
-        static std::uniform_int_distribution<> distribution(lower_bound, upper_bound + 1);
-        return distribution(random_engine);
+        std::uniform_int_distribution<> distribution(lower_bound, upper_bound + 1);
+        return distribution(generator);
     }
 
     float GetRandomRightAndDownTrajectory() {
@@ -43,9 +46,7 @@ namespace starfall {
     }
 
     ci::Color GetRandomColor() {
-        return ci::Color(GetRandomInt(0, 255),
-                         GetRandomInt(0, 255),
-                         GetRandomInt(0, 255));
+        return ci::Color( ci::CM_HSV, GetRandomFloat(0, 1), 1, 1 );
     }
 
     glm::vec2 GetRandomStartingPosition(float left_edge, float right_edge,

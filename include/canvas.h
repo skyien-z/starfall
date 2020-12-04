@@ -14,7 +14,7 @@ class Canvas: public Graphic {
     /**
      * Default constructor for canvas.
      */
-    Canvas();
+    Canvas() = default;
 
     /**
      * Explicit constructor for canvas.

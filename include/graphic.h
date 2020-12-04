@@ -15,9 +15,9 @@ class Graphic {
      */
     virtual void Update() = 0;
 
-    virtual ~Graphic(void) = 0;
+    virtual ~Graphic(void) = default;
 
-protected:
+  protected:
 
 };
 }

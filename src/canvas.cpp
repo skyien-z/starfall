@@ -2,8 +2,6 @@
 
 namespace starfall {
 
-    Canvas::Canvas() {}
-
     Canvas::Canvas(const glm::vec2 &top_left_corner, size_t canvas_width, size_t canvas_height) {
         top_edge_ = top_left_corner.y;
         bottom_edge_ = top_edge_ + canvas_height;

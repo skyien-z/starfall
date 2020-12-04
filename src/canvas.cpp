@@ -56,8 +56,8 @@ bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
     }
 
     // Get the lowest and highest x values of the star head
-    int star_lowest_x = star.GetPosition().x - star.GetStarHeadRadius();
-    int star_highest_x = star.GetPosition().x + star.GetStarHeadRadius();
+    int star_lowest_x = star.GetPosition().x - star.GetStarRadius();
+    int star_highest_x = star.GetPosition().x + star.GetStarRadius();
 
     // loops through x values of star head and checks if boundary points
     // with the same x values are within radius of the star head center.

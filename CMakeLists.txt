@@ -53,7 +53,8 @@ include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
                             src/starfall_app.cc
                             src/shooting_star.cpp
-                            src/canvas.cpp)
+                            src/canvas.cpp
+                            src/utils.cpp)
 
 list(APPEND TEST_FILES tests/shooting_star_test.cpp
                         tests/canvas_test.cpp)

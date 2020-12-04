@@ -24,12 +24,12 @@ void ShootingStar::Update() {
 
     // Adds current position to past_positions_ if current position is at least
     // radius/2 away from last star in past_positions
-    if (length(position_ - past_positions_.back()) >= star_radius_ / 2) {
+    if (length(position_ - past_positions_.back()) >= kStarRadius_ / 2) {
         past_positions_.push_back(glm::vec2(position_.x, position_.y));
     }
 
     // Keeps the length of the star tail to a constant
-    if (past_positions_.size() == tail_length_proportion_) {
+    if (past_positions_.size() == kTailLengthProportion_) {
         past_positions_.erase(past_positions_.begin());
     }
 }
@@ -55,10 +55,7 @@ void ShootingStar::UpdatePosition() {
 }
 
 void ShootingStar::Draw() const {
-    // Draws "stars" that aggregate into colored star tail
-    for (const glm::vec2& past_position: past_positions_) {
-        DrawStarHead(past_position);
-    }
+    DrawStarTail();
 
     // Draws current star head if star is above mountains
     if (!is_disappearing) {
@@ -68,20 +65,23 @@ void ShootingStar::Draw() const {
 
 void ShootingStar::DrawStarHead(glm::vec2 star_position) const {
     // draws white star head
-    ci::gl::color(ci::ColorA( 255, 255, 255));
-    ci::gl::drawSolidCircle(star_position, star_radius_);
+    ci::gl::ScopedColor scpColor(255, 255, 255);
+    ci::gl::drawSolidCircle(star_position, kStarRadius_);
 }
 
 void ShootingStar::DrawStarTail() const {
+    // last star representing tail has alpha of 0.25
+    float color_alpha = 0.25;
 
-    // Draws "stars" that aggregate into colored star tail
+    // size of past_positions_ vector is kTailLengthProportion
+    // alpha is incremented so that tail vector closet to star head is 1
+    float alpha_increment_by = (1 - color_alpha)/kTailLengthProportion_;
+
     for (const glm::vec2& past_position: past_positions_) {
-
-        ci::gl::ScopedColor scpColor(color_);
-        ci::gl::drawSolidCircle(past_position, star_radius_);
+        ci::gl::ScopedColor scpColor(color_.r, color_.g, color_.b, color_alpha);
+        ci::gl::drawSolidCircle(past_position, kStarRadius_);
+        color_alpha += alpha_increment_by;
     }
-
-    // draws tail star
 }
 
 bool ShootingStar::DoesStarTouchPoint(float x_value, float y_value) const {
@@ -89,7 +89,7 @@ bool ShootingStar::DoesStarTouchPoint(float x_value, float y_value) const {
     float distance_between_points = sqrt(pow(position_.x - x_value, 2) +
                                          pow(position_.y - y_value, 2));
 
-    return distance_between_points <= star_radius_;
+    return distance_between_points <= kStarRadius_;
 }
 
 bool ShootingStar::DoesStarTailHaveCoordinateValue(float coordinate_value,
@@ -98,9 +98,9 @@ bool ShootingStar::DoesStarTailHaveCoordinateValue(float coordinate_value,
     glm::vec2 star_tail_position = past_positions_.front();
 
     if (is_x_coordinate) {
-        return abs(star_tail_position.x -coordinate_value) <= star_radius_;
+        return abs(star_tail_position.x -coordinate_value) <= kStarRadius_;
     } else {
-        return abs(star_tail_position.y -coordinate_value) <= star_radius_;
+        return abs(star_tail_position.y -coordinate_value) <= kStarRadius_;
     }
 }
 
@@ -118,7 +118,7 @@ bool ShootingStar::HasDisappeared() const{
 }
 
 size_t ShootingStar::GetStarRadius() const {
-    return star_radius_;
+    return kStarRadius_;
 }
 
 bool ShootingStar::IsDisappearing() const {

@@ -86,11 +86,11 @@ class ShootingStar: public Graphic {
 
  private:
     static constexpr size_t kMoveByXPixels = 2;
-    static constexpr size_t star_radius_ = 2;
+    static constexpr size_t kStarRadius_ = 2;
 
     // Star tail length in pixels is
-    // (star_radius_/2) * tail_length_proportion_
-    static constexpr int tail_length_proportion_ = 15;
+    // (kStarRadius_/2) * kTailLengthProportion_
+    static constexpr int kTailLengthProportion_ = 15;
 
     // variables that change as app updates
     glm::vec2 position_;
@@ -114,6 +114,10 @@ class ShootingStar: public Graphic {
      */
     void DrawStarHead(glm::vec2 star_position) const;
 
+    /**
+     * Draws "stars" that aggregate into colored star tail;
+     * tail stars appears to gradually fade
+     */
     void DrawStarTail() const;
 
     /**

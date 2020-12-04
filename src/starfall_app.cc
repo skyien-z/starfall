@@ -40,13 +40,13 @@ void StarfallApp::setup() {
     canvas_ = this_canvas;
 
     // audio setup
-/*    ci::audio::VoiceRef mVoice;
+    ci::audio::VoiceRef mVoice;
     ci::audio::SourceFileRef sourceFile = ci::audio::load(
             ci::app::loadAsset("aria_de_mezzo.mp3"));
-    mVoice = ci::audio::Voice::create(sourceFile);
+    //mVoice = ci::audio::Voice::create(sourceFile);
 
     // Start playing audio from the voice:
-    mVoice->start();*/
+    //mVoice->start();
 }
 
 void StarfallApp::update() {

@@ -4,8 +4,8 @@
 #include "canvas.h"
 
 #include "cinder/app/App.h"
-#include "cinder/audio/Voice.h"
 #include "cinder/app/RendererGl.h"
+#include "cinder/audio/Voice.h"
 #include "canvas.h"
 
 namespace starfall {

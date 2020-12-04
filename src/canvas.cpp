@@ -20,7 +20,8 @@ namespace starfall {
         for (size_t i = 0; i < star_list_.size(); i++) {
             // Shortens star if star touches boundary and deletes star
             // when star is hidden from view
-            if (star_list_[i].HasDisappeared() || IsStarOutOfBounds(star_list_[i])) {
+            if (star_list_[i].HasDisappeared() ||
+            IsStarOutOfBounds(star_list_[i])) {
                 auto star_to_remove_it = star_list_.begin() + i;
                 if (star_to_remove_it != star_list_.end()) {
                     star_list_.erase(star_to_remove_it);
@@ -29,8 +30,8 @@ namespace starfall {
             } else if (IsStarDisappearingBehindBoundary(star_list_[i])) {
                 star_list_[i].DisappearProgressively();
             }
-
-            star_list_[i].Update(); // Will not change star position if star touches boundaries
+            // Will not change star position if star touches boundaries
+            star_list_[i].Update();
         }
     }
 
@@ -52,10 +53,9 @@ bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
     if (star.IsDisappearing()) {
         return true;
     }
-
     // Get the lowest and highest x values of the star head
-    int star_lowest_x = star.GetPosition().x - star.GetStarRadius();
-    int star_highest_x = star.GetPosition().x + star.GetStarRadius();
+    int star_lowest_x = star.GetPosition().x - kStarRadius_;
+    int star_highest_x = star.GetPosition().x + kStarRadius_;
 
     // loops through x values of star head and checks if boundary points
     // with the same x values are within radius of the star head center.
@@ -63,7 +63,6 @@ bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
         if (boundary_points_[x_value].empty()) {
             continue;
         }
-
         // gets vector of boundary y values with given boundary x value
         std::vector<int> list_of_y_values = boundary_points_[x_value];
 

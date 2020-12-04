@@ -6,6 +6,8 @@
 
 namespace starfall {
 
+    constexpr size_t kStarRadius_ = 2;
+
 /**
  * Creates and renders a single shooting star with its functionality
  */
@@ -82,11 +84,8 @@ class ShootingStar: public Graphic {
 
     const glm::vec2& GetPosition() const;
 
-    size_t GetStarRadius() const;
-
  private:
     static constexpr size_t kMoveByXPixels = 2;
-    static constexpr size_t kStarRadius_ = 2;
 
     // Star tail length in pixels is
     // (kStarRadius_/2) * kTailLengthProportion_

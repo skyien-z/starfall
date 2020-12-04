@@ -19,7 +19,6 @@ void ShootingStar::Update() {
     if (is_disappearing) {
         return;
     }
-
     UpdatePosition();
 
     // Adds current position to past_positions_ if current position is at least
@@ -115,10 +114,6 @@ const glm::vec2 &ShootingStar::GetPosition() const {
 
 bool ShootingStar::HasDisappeared() const{
     return past_positions_.empty();
-}
-
-size_t ShootingStar::GetStarRadius() const {
-    return kStarRadius_;
 }
 
 bool ShootingStar::IsDisappearing() const {

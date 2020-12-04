@@ -38,7 +38,7 @@ class StarfallApp : public ci::app::App {
 
     Canvas canvas_;
     ci::gl::Texture2dRef background_image_;
-    ci::ColorA current_color_;
+    ci::Color current_color_;
 
     // Key value of current trajectory value set
     float current_trajectory_key_;

@@ -98,7 +98,7 @@ class ShootingStar: public Graphic {
 
     // variables that are never changed once
     // star is initialized
-    ci::ColorA color_;
+    ci::Color color_;
     float trajectory_angle_;
 
     // past positions of star used to draw tail of shooting star

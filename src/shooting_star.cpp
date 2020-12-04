@@ -76,6 +76,7 @@ void ShootingStar::DrawStarTail() const {
 
     // Draws "stars" that aggregate into colored star tail
     for (const glm::vec2& past_position: past_positions_) {
+
         ci::gl::ScopedColor scpColor(color_);
         ci::gl::drawSolidCircle(past_position, star_radius_);
     }

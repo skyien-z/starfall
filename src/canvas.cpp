@@ -89,7 +89,7 @@ bool Canvas::IsStarOutOfBounds(const ShootingStar &star) const {
 }
 
 void Canvas::AddStarToList(const glm::vec2 &starting_position,
-                           const cinder::ColorA &star_color, float trajectory) {
+                           const cinder::Color &star_color, float trajectory) {
     AddStarToList(ShootingStar(starting_position, star_color, trajectory));
 }
 

@@ -57,16 +57,16 @@ void StarfallApp::mouseDrag(ci::app::MouseEvent event) {
 void StarfallApp::keyDown(ci::app::KeyEvent event) {
   switch (event.getCode()) {
   case ci::app::KeyEvent::KEY_r:
-      current_color_ = ci::Color(255, 0, 0);
+      current_color_ = ci::ColorA(255, 0, 0, 1);
       break;
   case ci::app::KeyEvent::KEY_g:
-      current_color_ = ci::Color(0, 255, 0);
+      current_color_ = ci::ColorA(0, 255, 0, 1);
       break;
   case ci::app::KeyEvent::KEY_b:
-      current_color_ = ci::Color(0, 0, 255);
+      current_color_ = ci::ColorA(0, 0, 255, 1);
       break;
   case ci::app::KeyEvent::KEY_o:
-      current_color_ = ci::Color(255, 128, 0);
+      current_color_ = ci::ColorA(255, 128, 0, 1);
       break;
   case ci::app::KeyEvent::KEY_TAB:
     canvas_.RemoveBoundaries();

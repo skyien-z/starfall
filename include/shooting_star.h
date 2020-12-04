@@ -98,7 +98,7 @@ class ShootingStar: public Graphic {
 
     // variables that are never changed once
     // star is initialized
-    ci::Color color_;
+    ci::ColorA color_;
     float trajectory_angle_;
 
     // past positions of star used to draw tail of shooting star
@@ -114,7 +114,7 @@ class ShootingStar: public Graphic {
      */
     void DrawStarHead(glm::vec2 star_position) const;
 
-    void DrawStarTail(glm::vec2 star_position) const;
+    void DrawStarTail() const;
 
     /**
      * Changes current position according to y = m x + b; m = tan(y) where

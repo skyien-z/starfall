@@ -62,7 +62,7 @@ class Canvas: public Graphic {
      * @param trajectory trajectory angle of star path
      */
     void AddStarToList(const glm::vec2& starting_position,
-                        const ci::Color& star_color, float trajectory);
+                        const ci::ColorA& star_color, float trajectory);
 
     /**
      * Checks if star has disappeared or is in the process of disappearing.

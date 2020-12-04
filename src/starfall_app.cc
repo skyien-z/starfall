@@ -71,12 +71,13 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
   case ci::app::KeyEvent::KEY_TAB:
     canvas_.RemoveBoundaries();
     break;
+  case ci::app::KeyEvent::KEY_SPACE:
+      current_color_ = GetRandomColor();
+      current_trajectory_ = GetRandomTrajectory();
   case ci::app::KeyEvent::KEY_RIGHT:
-      // Goes counterclockwise around the canvas
       current_trajectory_ = GetRandomRightTrajectory();
       break;
   case ci::app::KeyEvent::KEY_LEFT:
-      // Goes clockwise around the canvas
       current_trajectory_ = GetRandomLeftTrajectory();
       break;
   }

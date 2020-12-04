@@ -22,7 +22,7 @@ namespace starfall {
     }
 
     float GetRandomRightAndDownTrajectory() {
-        return GetRandomFloat(0, M_PI/2);
+        return GetRandomFloat(0, M_PI/3);
     }
 
     float GetRandomLeftAndDownTrajectory() {
@@ -45,6 +45,16 @@ namespace starfall {
         return GetRandomFloat(2*M_PI/3, 4*M_PI/3);
     }
 
+    float GetRandomTrajectory() {
+        switch (GetRandomInt(1, 2)) {
+            case 1:
+                return GetRandomRightTrajectory();
+            case 2:
+                return GetRandomLeftTrajectory();
+        }
+        return GetRandomLeftTrajectory();
+    }
+
     ci::Color GetRandomColor() {
         return ci::Color( ci::CM_HSV, GetRandomFloat(0, 1), 1, 1 );
     }
@@ -54,4 +64,4 @@ namespace starfall {
         return glm::vec2(GetRandomInt(left_edge, right_edge),
                          GetRandomInt(bottom_edge, top_edge));
     }
-}
+} // namespace starfall

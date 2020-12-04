@@ -5,22 +5,39 @@
 namespace starfall {
 
     /**
-     * Returns a random float [0, Pi/3].
+     * Generates and returns random float from [lower_bound, upper_bound).
+     */
+    float GetRandomFloat(float lower_bound, float upper_bound);
+
+    /**
+     * Returns a random float [0, Pi/3).
+     *
+     * A trajectory that is abs(tan(trajectory)) < 2 will guarantee that the
+     * change in y of a particle will not exceed the change in x.
      */
     float GetRandomRightAndDownTrajectory();
 
     /**
-     * Returns a random float [4*Pi/3, Pi].
+     * Returns a random float [2*Pi/3, Pi).
+     *
+     * A trajectory that is abs(tan(trajectory)) < 2 will guarantee that the
+     * change in y of a particle will not exceed the change in x.
      */
     float GetRandomLeftAndDownTrajectory();
 
     /**
-     * Returns a random float [Pi, 2*Pi/3].
+     * Returns a random float [Pi, 4*Pi/3).
+     *
+     * A trajectory that is abs(tan(trajectory)) < 2 will guarantee that the
+     * change in y of a particle will not exceed the change in x.
      */
     float GetRandomLeftAndUpTrajectory();
 
     /**
-     * Returns a random float [5*Pi/3, 2*Pi].
+     * Returns a random float [5*Pi/3, 2*Pi).
+     *
+     * A trajectory that is abs(tan(trajectory)) < 2 will guarantee that the
+     * change in y of a particle will not exceed the change in x.
      */
     float GetRandomRightAndUpTrajectory();
 

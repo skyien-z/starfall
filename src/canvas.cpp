@@ -5,11 +5,11 @@ namespace starfall {
     Canvas::Canvas() {}
 
     Canvas::Canvas(const glm::vec2 &top_left_corner, size_t canvas_width, size_t canvas_height) {
-        top_bound_ = top_left_corner.y;
-        bottom_bound_ = top_bound_ + canvas_height;
+        top_edge_ = top_left_corner.y;
+        bottom_edge_ = top_edge_ + canvas_height;
 
-        left_bound_ = top_left_corner.x;
-        right_bound_ = left_bound_ + canvas_width;
+        left_edge_ = top_left_corner.x;
+        right_edge_ = left_edge_ + canvas_width;
     }
 
     void Canvas::Draw() const {
@@ -50,8 +50,7 @@ namespace starfall {
     }
 
 bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
-    // IsDisappearing is set to true the first time
-    // DisappearProgressively() is called
+    // variable set to true the first time DisappearProgressively() is called
     if (star.IsDisappearing()) {
         return true;
     }
@@ -83,10 +82,10 @@ bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
 
 
 bool Canvas::IsStarOutOfBounds(const ShootingStar &star) const {
-    return star.DoesStarTailHaveCoordinateValue(top_bound_, false) ||
-            star.DoesStarTailHaveCoordinateValue(bottom_bound_, false) ||
-            star.DoesStarTailHaveCoordinateValue(right_bound_, true) ||
-            star.DoesStarTailHaveCoordinateValue(left_bound_, true);
+    return star.DoesStarTailHaveCoordinateValue(top_edge_, false) ||
+           star.DoesStarTailHaveCoordinateValue(bottom_edge_, false) ||
+           star.DoesStarTailHaveCoordinateValue(right_edge_, true) ||
+           star.DoesStarTailHaveCoordinateValue(left_edge_, true);
 }
 
 void Canvas::AddStarToList(const glm::vec2 &starting_position,

@@ -16,6 +16,13 @@ class Canvas: public Graphic {
      */
     Canvas();
 
+    /**
+     * Explicit constructor for canvas.
+     *
+     * @param top_left_corner; top left corner of canvas
+     * @param canvas_width; width of canvas
+     * @param canvas_height; height of canvas
+     */
     Canvas(const glm::vec2 &top_left_corner, size_t canvas_width, size_t canvas_height);
 
     /**
@@ -31,8 +38,10 @@ class Canvas: public Graphic {
     void Update();
 
     /**
-     * Adds vec2 point to boundary points list; star disappears
-     * when it touches any of these points.
+     * Adds point to boundary points map with the x coordinate
+     * of the boundary point passed in as the key and the y coordinate
+     * as a value of the int list referenced to by the key––this way,
+     * the unordered map can contain multiple y values per x value.
      *
      * @param boundary_point vec2 point to add to list
      */
@@ -45,6 +54,13 @@ class Canvas: public Graphic {
      */
     void AddStarToList(const ShootingStar& star);
 
+    /**
+     * Adds a star to the star list.
+     *
+     * @param starting_position of star
+     * @param star_color ci::Color of star
+     * @param trajectory trajectory angle of star path
+     */
     void AddStarToList(const glm::vec2& starting_position,
                         const ci::Color& star_color, float trajectory);
 
@@ -58,7 +74,7 @@ class Canvas: public Graphic {
     bool IsStarDisappearingBehindBoundary(const ShootingStar& star);
 
     /**
-     * Clears vector that holds boundary points.
+     * Clears unordered map that holds boundary points.
      */
     void RemoveBoundaries();
 
@@ -66,12 +82,12 @@ class Canvas: public Graphic {
 
   private:
     // These floats represent the highest and lowest y values of the canvas
-    float top_bound_; // corresponds to lowest y value
-    float bottom_bound_; // corresponds to highest y value
+    float top_edge_; // corresponds to lowest y value
+    float bottom_edge_; // corresponds to highest y value
 
     // These floats represent the rightmost and leftmost x values of the canvas
-    float right_bound_; // rightmost x value
-    float left_bound_; // leftmost x value
+    float right_edge_; // rightmost x value
+    float left_edge_; // leftmost x value
 
     std::vector<ShootingStar> star_list_;
 

@@ -14,6 +14,8 @@ class Simulation: public Graphic{
   public:
     Simulation(const Canvas& canvas);
 
+    Simulation() = default;
+
     void Draw() const;
 
     void Update();

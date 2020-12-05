@@ -13,7 +13,12 @@ StarfallApp::StarfallApp() {
 void StarfallApp::draw() {
     ci::gl::draw(background_image_);
 
-    canvas_.Draw();
+    if (is_playing_simulation_) {
+        // the canvas is drawn in the simulation
+        simulation_.Draw();
+    } else {
+        canvas_.Draw();
+    }
 }
 
 void StarfallApp::setup() {
@@ -24,21 +29,16 @@ void StarfallApp::setup() {
                   background_image_->getHeight());
 
     // Conform canvas size to image specifications
-    Canvas this_canvas(glm::vec2(0, 0), getWindowWidth(),getWindowHeight());
-    canvas_ = this_canvas;
-
-    // audio setup
-    ci::audio::VoiceRef mVoice;
-    ci::audio::SourceFileRef sourceFile = ci::audio::load(
-            ci::app::loadAsset("aria_de_mezzo.mp3"));
-    //mVoice = ci::audio::Voice::create(sourceFile);
-
-    // Start playing audio from the voice:
-    //mVoice->start();
+    canvas_ = Canvas(glm::vec2(0, 0), getWindowWidth(),getWindowHeight());
+    simulation_ = Simulation(canvas_);
 }
 
 void StarfallApp::update() {
-    canvas_.Update();
+    if (is_playing_simulation_) {
+        simulation_.Update();
+    } else {
+        canvas_.Update();
+    }
 }
 
 void StarfallApp::mouseDown(ci::app::MouseEvent event) {
@@ -74,6 +74,10 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
   case ci::app::KeyEvent::KEY_SPACE:
       current_color_ = GetRandomColor();
       current_trajectory_ = GetRandomTrajectory();
+  case ci::app::KeyEvent::KEY_RETURN:
+      is_playing_simulation_ = true;
+      simulation_.StartSimulation();
+      break;
   case ci::app::KeyEvent::KEY_RIGHT:
       current_trajectory_ = GetRandomRightTrajectory();
       break;

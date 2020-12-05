@@ -3,16 +3,15 @@
 namespace starfall {
 
 Simulation::Simulation(const Canvas &canvas) : canvas_(canvas) {
-    ReadInParagraph("/Users/user/CLionProjects/cinder_0.9.2_mac/"
-                    "my_projects/final-project-skyien-z/resources/starfall_paragraph");
+    ReadInParagraph("/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
+                    "final-project-skyien-z/resources/starfall_paragraph");
 
     // Calculate star spawning bounds
     star_spawn_left_edge = canvas_.GetLeftEdge();
     // Gets x value in middle of graph
     star_spawn_right_edge = (canvas_.GetRightEdge() - canvas_.GetLeftEdge())/2;
-    star_spawn_bottom_edge = canvas_.GetBottomEdge(); // gets lowest y value
-    // Gets y value in middle of graph
-    star_spawn_top_edge = (canvas_.GetTopEdge() - canvas_.GetBottomEdge())/2;
+    star_spawn_bottom_edge = canvas_.GetBottomEdge(); // lowest y value
+    star_spawn_top_edge = canvas_.GetBottomEdge() + 60;
 }
 
 void Simulation::ReadInParagraph(std::string absolute_file_path) {
@@ -36,7 +35,12 @@ void Simulation::StartSimulation() {
 
 void Simulation::Draw() const {
     if (!is_simulation_over) {
+        glm::vec2 string_position (star_spawn_right_edge, canvas_.GetBottomEdge() + 50);
 
+        ci::gl::drawStringCentered(paragraph_lines_[frame_index_], string_position,
+        ci::Color(255, 255, 255), ci::Font("Apple Chancery", 16));
+
+        canvas_.Draw();
     }
 }
 
@@ -52,13 +56,16 @@ void Simulation::Update() {
     }
 
     int current_second = floor(timer_.getSeconds());
-    bool isWholeSecond = timer_.getSeconds() - current_second <= 0.0001;
+    bool isWholeSecond = timer_.getSeconds() - current_second <= 0.01;
 
     // Increments frame (changes line displayed) every kSecondsForFrameChange
-    if (isWholeSecond && current_second % kSecondsForFrameChange == 0) {
+    if (isWholeSecond && current_second % kSecondsForFrameChange == 1) {
         frame_index_++;
+        GenerateStarInBounds();
+        GenerateStarInBounds();
     }
 
+    canvas_.Update();
 }
 
 void Simulation::GenerateStarInBounds() {
@@ -66,7 +73,7 @@ void Simulation::GenerateStarInBounds() {
             star_spawn_left_edge, star_spawn_right_edge,
             star_spawn_bottom_edge, star_spawn_top_edge);
     canvas_.AddStarToList(starting_position, GetRandomColor(),
-                          GetRandomLeftTrajectory());
+                          GetRandomRightAndDownTrajectory());
 }
 
 void Simulation::EndSimulation() {

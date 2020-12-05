@@ -81,10 +81,10 @@ class Canvas: public Graphic {
     const std::vector<ShootingStar>& GetStarList();
 
     // Get the edges of the canvas
-    float GetTopEdge();
-    float GetBottomEdge();
-    float GetRightEdge();
-    float GetLeftEdge();
+    float GetTopEdge() const;
+    float GetBottomEdge() const;
+    float GetRightEdge() const;
+    float GetLeftEdge() const;
 
   private:
     // These floats represent the highest and lowest y values of the canvas

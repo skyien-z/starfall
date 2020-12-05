@@ -8,6 +8,7 @@
 #include "cinder/audio/Voice.h"
 #include "canvas.h"
 #include "utils.h"
+#include "simulation.h"
 
 namespace starfall {
 
@@ -31,10 +32,12 @@ class StarfallApp : public ci::app::App {
 
  private:
     Canvas canvas_;
+    Simulation simulation_;
 
     ci::gl::Texture2dRef background_image_;
     ci::Color current_color_;
     float current_trajectory_;
+    bool is_playing_simulation_;
 };
 
 }  // namespace ideal_gas

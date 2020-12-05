@@ -18,7 +18,10 @@ class Simulation: public Graphic{
     void Update();
 
  private:
+    Canvas canvas_;
     ci::Timer timer_;
+
+    static constexpr size_t kBeginningFrame = 0;
 
     // holds on to all sentence fragments that make up the paragraph
     std::vector<std::string> paragraph_lines_;
@@ -27,6 +30,8 @@ class Simulation: public Graphic{
     size_t frame_index_;
 
     void ReadInParagraph(std::string abs_or_relative_file_path);
+
+    void ClearSimulation();
 
 };
 } // namespace starfall

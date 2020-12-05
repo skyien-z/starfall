@@ -17,11 +17,15 @@ class Simulation: public Graphic{
 
     void Update();
 
- private:
+    void StartSimulation();
+
+    void EndSimulation();
+private:
     Canvas canvas_;
     ci::Timer timer_;
 
     static constexpr size_t kBeginningFrame = 0;
+    static constexpr size_t kSecondsForFrameChange = 2;
 
     // holds on to all sentence fragments that make up the paragraph
     std::vector<std::string> paragraph_lines_;
@@ -31,8 +35,7 @@ class Simulation: public Graphic{
 
     void ReadInParagraph(std::string abs_or_relative_file_path);
 
-    void ClearSimulation();
-
+    void GenerateStarInBounds();
 };
 } // namespace starfall
 

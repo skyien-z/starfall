@@ -88,8 +88,8 @@ class Canvas: public Graphic {
 
   private:
     // These floats represent the highest and lowest y values of the canvas
-    float top_edge_; // corresponds to lowest y value
-    float bottom_edge_; // corresponds to highest y value
+    float top_edge_; // corresponds to highest y value
+    float bottom_edge_; // corresponds to lowest y value
 
     // These floats represent the rightmost and leftmost x values of the canvas
     float right_edge_; // rightmost x value

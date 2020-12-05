@@ -97,9 +97,9 @@ bool ShootingStar::DoesStarTailHaveCoordinateValue(float coordinate_value,
     glm::vec2 star_tail_position = past_positions_.front();
 
     if (is_x_coordinate) {
-        return abs(star_tail_position.x -coordinate_value) <= kStarRadius_;
+        return abs(star_tail_position.x - coordinate_value) <= kStarRadius_;
     } else {
-        return abs(star_tail_position.y -coordinate_value) <= kStarRadius_;
+        return abs(star_tail_position.y - coordinate_value) <= kStarRadius_;
     }
 }
 

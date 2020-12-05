@@ -9,9 +9,9 @@ Simulation::Simulation(const Canvas &canvas) : canvas_(canvas) {
     star_spawn_left_edge = canvas_.GetLeftEdge();
     // Gets x value in middle of graph
     star_spawn_right_edge = (canvas_.GetRightEdge() - canvas_.GetLeftEdge())/2;
-    star_spawn_bottom_edge = canvas_.GetTopEdge(); // gets lowest y value
+    star_spawn_bottom_edge = canvas_.GetBottomEdge(); // gets lowest y value
     // Gets y value in middle of graph
-    star_spawn_top_edge = (canvas_.GetBottomEdge() - canvas_.GetTopEdge())/2;
+    star_spawn_top_edge = (canvas_.GetTopEdge() - canvas_.GetBottomEdge())/2;
 }
 
 void Simulation::ReadInParagraph(std::string abs_or_relative_file_path) {

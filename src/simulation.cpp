@@ -30,25 +30,27 @@ void Simulation::StartSimulation() {
     // "Resets" the timer if simulation was run before
     timer_.start(0);
     frame_index_ = kBeginningFrame;
-    is_simulation_over = false;
+    is_playing_simulation = true;
+    text_alpha_ = 1;
 }
 
 void Simulation::Draw() const {
-    if (!is_simulation_over) {
-        glm::vec2 string_position (star_spawn_right_edge, canvas_.GetBottomEdge() + 50);
-
-        ci::gl::drawStringCentered(paragraph_lines_[frame_index_], string_position,
-        ci::Color(255, 255, 255), ci::Font("Apple Chancery", 16));
-
-        canvas_.Draw();
-    }
-}
-
-void Simulation::Update() {
-    if (is_simulation_over) {
+    if (!is_playing_simulation) {
         return;
     }
 
+    glm::vec2 string_position (star_spawn_right_edge, canvas_.GetBottomEdge() + 50);
+
+    ci::gl::drawStringCentered(paragraph_lines_[frame_index_], string_position,
+    ci::ColorA(255, 255, 255, text_alpha_), ci::Font("Apple Chancery", 16));
+
+    canvas_.Draw();
+}
+
+void Simulation::Update() {
+    if (!is_playing_simulation) {
+        return;
+    }
     // if all frames have been displayed
     if (frame_index_ == paragraph_lines_.size()) {
         EndSimulation();
@@ -58,31 +60,46 @@ void Simulation::Update() {
     int current_second = floor(timer_.getSeconds());
     bool isWholeSecond = timer_.getSeconds() - current_second <= 0.01;
 
-    // Increments frame (changes line displayed) every kSecondsForFrameChange
+    // If statement which updates frame and generates a star is
+    // run every 2 seconds (value of kSecondsForFrameChange)
     if (isWholeSecond && current_second % kSecondsForFrameChange == 1) {
         frame_index_++;
-        GenerateStarInBounds();
-        GenerateStarInBounds();
+        text_alpha_ = 1;
+
+        GenerateStarInBounds(GetRandomRightAndDownTrajectory());
+    } else {
+        // creates text fading effect by decreasing text opacity as time goes on
+        text_alpha_ -= 0.01;
+    }
+
+    // Ensures that a star is released every second (runs the second
+    // after above if statement runs)
+    if (isWholeSecond && current_second % kSecondsForFrameChange == 0) {
+        GenerateStarInBounds(M_PI/3);
     }
 
     canvas_.Update();
 }
 
-void Simulation::GenerateStarInBounds() {
+void Simulation::GenerateStarInBounds(float trajectory) {
     glm::vec2 starting_position = GetRandomStartingPosition(
             star_spawn_left_edge, star_spawn_right_edge,
             star_spawn_bottom_edge, star_spawn_top_edge);
     canvas_.AddStarToList(starting_position, GetRandomColor(),
-                          GetRandomRightAndDownTrajectory());
+                          trajectory);
 }
 
 void Simulation::EndSimulation() {
     timer_.stop();
-    is_simulation_over = true;
+    is_playing_simulation = false;
 }
 
 const std::vector<std::string> &Simulation::GetParagraphLines() {
     return paragraph_lines_;
+}
+
+bool Simulation::IsPlayingSimulation() const {
+    return is_playing_simulation;
 }
 
 } // namespace starfall

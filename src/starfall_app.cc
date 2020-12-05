@@ -34,8 +34,10 @@ void StarfallApp::setup() {
 }
 
 void StarfallApp::update() {
+    // if simulation is over, will update bool is_playing_simulation_ to false
     if (is_playing_simulation_) {
         simulation_.Update();
+        is_playing_simulation_ = simulation_.IsPlayingSimulation();
     } else {
         canvas_.Update();
     }

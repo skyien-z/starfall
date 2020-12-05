@@ -24,12 +24,15 @@ class Simulation: public Graphic{
 
     void EndSimulation();
 
+    bool IsPlayingSimulation() const;
+
     const std::vector<std::string>& GetParagraphLines();
 
 private:
     Canvas canvas_;
     ci::Timer timer_;
-    bool is_simulation_over;
+    bool is_playing_simulation;
+    float text_alpha_;
 
     static constexpr size_t kBeginningFrame = 0;
     static constexpr size_t kSecondsForFrameChange = 2;
@@ -47,7 +50,7 @@ private:
 
     void ReadInParagraph(std::string absolute_file_path);
 
-    void GenerateStarInBounds();
+    void GenerateStarInBounds(float trajectory);
 };
 } // namespace starfall
 

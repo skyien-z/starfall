@@ -21,9 +21,13 @@ class Simulation: public Graphic{
     void StartSimulation();
 
     void EndSimulation();
+
+    const std::vector<std::string>& GetParagraphLines();
+
 private:
     Canvas canvas_;
     ci::Timer timer_;
+    bool is_simulation_over;
 
     static constexpr size_t kBeginningFrame = 0;
     static constexpr size_t kSecondsForFrameChange = 2;
@@ -39,7 +43,7 @@ private:
     // index of line of paragraph_lines_ that simulation is displaying
     size_t frame_index_;
 
-    void ReadInParagraph(std::string abs_or_relative_file_path);
+    void ReadInParagraph(std::string absolute_file_path);
 
     void GenerateStarInBounds();
 };

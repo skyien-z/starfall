@@ -3,7 +3,8 @@
 namespace starfall {
 
 Simulation::Simulation(const Canvas &canvas) : canvas_(canvas) {
-    ReadInParagraph("resources/starfall_paragraph"); //TODO: check if relative or absolute filepath
+    ReadInParagraph("/Users/user/CLionProjects/cinder_0.9.2_mac/"
+                    "my_projects/final-project-skyien-z/resources/starfall_paragraph");
 
     // Calculate star spawning bounds
     star_spawn_left_edge = canvas_.GetLeftEdge();
@@ -14,8 +15,8 @@ Simulation::Simulation(const Canvas &canvas) : canvas_(canvas) {
     star_spawn_top_edge = (canvas_.GetTopEdge() - canvas_.GetBottomEdge())/2;
 }
 
-void Simulation::ReadInParagraph(std::string abs_or_relative_file_path) {
-    std::ifstream text_stream (abs_or_relative_file_path);
+void Simulation::ReadInParagraph(std::string absolute_file_path) {
+    std::ifstream text_stream (absolute_file_path);
 
     std::string next_line;
     while (!text_stream.eof()) {
@@ -23,19 +24,33 @@ void Simulation::ReadInParagraph(std::string abs_or_relative_file_path) {
 
         paragraph_lines_.push_back(next_line);
     }
+    text_stream.close();
 }
 
 void Simulation::StartSimulation() {
     // "Resets" the timer if simulation was run before
     timer_.start(0);
     frame_index_ = kBeginningFrame;
+    is_simulation_over = false;
 }
 
 void Simulation::Draw() const {
+    if (!is_simulation_over) {
 
+    }
 }
 
 void Simulation::Update() {
+    if (is_simulation_over) {
+        return;
+    }
+
+    // if all frames have been displayed
+    if (frame_index_ == paragraph_lines_.size()) {
+        EndSimulation();
+        return;
+    }
+
     int current_second = floor(timer_.getSeconds());
     bool isWholeSecond = timer_.getSeconds() - current_second <= 0.0001;
 
@@ -56,6 +71,11 @@ void Simulation::GenerateStarInBounds() {
 
 void Simulation::EndSimulation() {
     timer_.stop();
+    is_simulation_over = true;
+}
+
+const std::vector<std::string> &Simulation::GetParagraphLines() {
+    return paragraph_lines_;
 }
 
 } // namespace starfall

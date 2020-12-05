@@ -56,7 +56,6 @@ void Simulation::Update() {
         EndSimulation();
         return;
     }
-
     int current_second = floor(timer_.getSeconds());
     bool isWholeSecond = timer_.getSeconds() - current_second <= 0.01;
 
@@ -71,13 +70,11 @@ void Simulation::Update() {
         // creates text fading effect by decreasing text opacity as time goes on
         text_alpha_ -= 0.01;
     }
-
     // Ensures that a star is released every second (runs the second
     // after above if statement runs)
     if (isWholeSecond && current_second % kSecondsForFrameChange == 0) {
         GenerateStarInBounds(M_PI/3);
     }
-
     canvas_.Update();
 }
 

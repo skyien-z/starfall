@@ -9,18 +9,6 @@ StarfallApp::StarfallApp() {
     current_color_ = ci::Color(0, 255, 0);
     current_trajectory_ = M_PI/4;
 }
-
-void StarfallApp::draw() {
-    ci::gl::draw(background_image_);
-
-    if (is_playing_simulation_) {
-        // the canvas is drawn in the simulation
-        simulation_.Draw();
-    } else {
-        canvas_.Draw();
-    }
-}
-
 void StarfallApp::setup() {
     auto image = ci::loadImage( "/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
                                 "final-project-skyien-z/resources/mountains_for_starfall.png");
@@ -31,6 +19,17 @@ void StarfallApp::setup() {
     // Conform canvas size to image specifications
     canvas_ = Canvas(glm::vec2(0, 0), getWindowWidth(),getWindowHeight());
     simulation_ = Simulation(canvas_);
+}
+
+void StarfallApp::draw() {
+    ci::gl::draw(background_image_);
+
+    if (is_playing_simulation_) {
+        // the canvas is drawn in the simulation
+        simulation_.Draw();
+    } else {
+        canvas_.Draw();
+    }
 }
 
 void StarfallApp::update() {
@@ -61,24 +60,20 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
   case ci::app::KeyEvent::KEY_r:
       current_color_ = GetRandomColor();
       break;
-  case ci::app::KeyEvent::KEY_g:
-      current_color_ = ci::Color(0, 255, 0);
-      break;
-  case ci::app::KeyEvent::KEY_b:
-      current_color_ = ci::Color(0, 0, 255);
-      break;
-  case ci::app::KeyEvent::KEY_o:
-      current_color_ = ci::Color(255, 128, 0);
-      break;
   case ci::app::KeyEvent::KEY_TAB:
     canvas_.RemoveBoundaries();
     break;
   case ci::app::KeyEvent::KEY_SPACE:
       current_color_ = GetRandomColor();
       current_trajectory_ = GetRandomTrajectory();
+      break;
   case ci::app::KeyEvent::KEY_RETURN:
       is_playing_simulation_ = true;
       simulation_.StartSimulation();
+      break;
+  case ci::app::KeyEvent::KEY_BACKSPACE:
+      is_playing_simulation_ = false;
+      simulation_.EndSimulation();
       break;
   case ci::app::KeyEvent::KEY_RIGHT:
       current_trajectory_ = GetRandomRightTrajectory();

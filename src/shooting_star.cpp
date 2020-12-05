@@ -69,8 +69,8 @@ void ShootingStar::DrawStarHead(glm::vec2 star_position) const {
 }
 
 void ShootingStar::DrawStarTail() const {
-    // last star representing tail has alpha of 0.25
-    float color_alpha = 0.25;
+    // last star representing tail has alpha of kLastTailStarAlpha
+    float color_alpha = kLastTailStarAlpha;
 
     // size of past_positions_ vector is kTailLengthProportion
     // alpha is incremented so that tail vector closet to star head is 1

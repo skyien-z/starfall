@@ -86,6 +86,7 @@ class ShootingStar: public Graphic {
 
  private:
     static constexpr size_t kMoveByXPixels = 2;
+    static constexpr float kLastTailStarAlpha = 0.25;
 
     // Star tail length in pixels is
     // (kStarRadius_/2) * kTailLengthProportion_

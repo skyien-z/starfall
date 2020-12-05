@@ -4,6 +4,14 @@ namespace starfall {
 
 Simulation::Simulation(const Canvas &canvas) : canvas_(canvas) {
     ReadInParagraph("resources/starfall_paragraph"); //TODO: check if relative or absolute filepath
+
+    // Calculate star spawning bounds
+    star_spawn_left_edge = canvas_.GetLeftEdge();
+    // Gets x value in middle of graph
+    star_spawn_right_edge = (canvas_.GetRightEdge() - canvas_.GetLeftEdge())/2;
+    star_spawn_bottom_edge = canvas_.GetTopEdge(); // gets lowest y value
+    // Gets y value in middle of graph
+    star_spawn_top_edge = (canvas_.GetBottomEdge() - canvas_.GetTopEdge())/2;
 }
 
 void Simulation::ReadInParagraph(std::string abs_or_relative_file_path) {
@@ -39,7 +47,11 @@ void Simulation::Update() {
 }
 
 void Simulation::GenerateStarInBounds() {
-
+    glm::vec2 starting_position = GetRandomStartingPosition(
+            star_spawn_left_edge, star_spawn_right_edge,
+            star_spawn_bottom_edge, star_spawn_top_edge);
+    canvas_.AddStarToList(starting_position, GetRandomColor(),
+                          GetRandomLeftTrajectory());
 }
 
 void Simulation::EndSimulation() {

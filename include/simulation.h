@@ -1,6 +1,7 @@
 #pragma once
 
 #include "canvas.h"
+#include "utils.h"
 
 namespace starfall {
 
@@ -26,6 +27,11 @@ private:
 
     static constexpr size_t kBeginningFrame = 0;
     static constexpr size_t kSecondsForFrameChange = 2;
+
+    float star_spawn_left_edge;
+    float star_spawn_right_edge;
+    float star_spawn_top_edge;
+    float star_spawn_bottom_edge;
 
     // holds on to all sentence fragments that make up the paragraph
     std::vector<std::string> paragraph_lines_;

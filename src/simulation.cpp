@@ -31,7 +31,7 @@ void Simulation::StartSimulation() {
     timer_.start(0);
     frame_index_ = kBeginningFrame;
     is_playing_simulation = true;
-    text_color_alpha_ = 1;
+    text_color_alpha_ = 0;
 }
 
 void Simulation::Draw() const {
@@ -63,11 +63,11 @@ void Simulation::Update() {
     // run every 2 seconds (value of kSecondsForFrameChange)
     if (isWholeSecond && current_second % kSecondsForFrameChange == 1) {
         frame_index_++;
-        text_color_alpha_ = 1;
+        text_color_alpha_ = 0;
         GenerateStarInBounds(GetRandomRightAndDownTrajectory());
     } else {
         // creates text fading effect by decreasing text opacity as time goes on
-        text_color_alpha_ -= 0.01;
+        text_color_alpha_ += 0.05;
     }
     // Ensures that a star is released every second (runs the second
     // after above if statement runs)

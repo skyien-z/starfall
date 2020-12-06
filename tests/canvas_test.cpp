@@ -100,5 +100,28 @@ TEST_CASE("Add Point to Boundary Map") {
         test_canvas.AddPointToBoundaries(glm::vec2(55, 55));
         test_canvas.AddPointToBoundaries(glm::vec2(55, 56));
     }
+}
 
+TEST_CASE("Exporting Boundary Data to File") {
+    std::string absolute_file_path = "/Users/user/CLionProjects/cinder_0.9.2_mac/"
+                                     "my_projects/final-project-skyien-z/"
+                                     "resources/test_boundary_exporting";
+    Canvas test_canvas(glm::vec2(50, 50),
+                       200, 200);
+
+    test_canvas.AddPointToBoundaries(glm::vec2(55, 55));
+    test_canvas.AddPointToBoundaries(glm::vec2(55, 56));
+    test_canvas.AddPointToBoundaries(glm::vec2(60, 90));
+
+    test_canvas.ExportBoundaryPointsToFile(absolute_file_path);
+
+    std::ifstream text_stream (absolute_file_path);
+    std::string first_line;
+    std::getline(text_stream, first_line);
+    REQUIRE(first_line == "60 90 ");
+
+    std::string second_line;
+    std::getline(text_stream, second_line);
+    REQUIRE(second_line == "55 55 56 ");
+    text_stream.close();
 }

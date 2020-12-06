@@ -67,7 +67,7 @@ void Simulation::Update() {
     if (isWholeSecond && current_second % kSecondsForFrameChange == 1) {
         frame_index_++;
         text_color_alpha_ = 0;
-        GenerateStarInBounds(GetRandomRightAndDownTrajectory());
+        GenerateStarInBounds(GetRandomDownTrajectory());
     } else {
         // creates text fading effect by decreasing text opacity as time goes on
         text_color_alpha_ += 0.05;

@@ -29,12 +29,14 @@ namespace starfall {
         return GetRandomFloat(2*M_PI/3, M_PI);
     }
 
-    float GetRandomRightAndUpTrajectory() {
-        return GetRandomFloat(M_PI, 4*M_PI/3);
-    }
-
-    float GetRandomLeftAndUpTrajectory() {
-        return GetRandomFloat(5*M_PI/3, 2*M_PI);
+    float GetRandomDownTrajectory() {
+        switch (GetRandomInt(1, 2)) {
+            case 1:
+                return GetRandomLeftAndDownTrajectory();
+            case 2:
+                return GetRandomRightAndDownTrajectory();
+        }
+        return GetRandomLeftTrajectory();
     }
 
     float GetRandomRightTrajectory() {

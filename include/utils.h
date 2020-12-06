@@ -23,22 +23,6 @@ namespace starfall {
     float GetRandomRightAndDownTrajectory();
 
     /**
-     * Returns a random float [2*Pi/3, Pi).
-     *
-     * A trajectory that is abs(tan(trajectory)) < 2 will guarantee that
-     *  the change in y of a particle will not exceed the change in x.
-     */
-    float GetRandomLeftAndDownTrajectory();
-
-    /**
-     * Returns a random float [0, Pi/3) U [2*Pi/3, Pi).
-     *
-     * A trajectory that is abs(tan(trajectory)) < 2 will guarantee that
-     * the change in y of a particle will not exceed the change in x.
-     */
-    float GetRandomDownTrajectory();
-
-    /**
      * Returns a random float [5*Pi/3, 7*Pi/3).
      *
      * A trajectory that is abs(tan(trajectory)) < 2 will guarantee that

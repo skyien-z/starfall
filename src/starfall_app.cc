@@ -3,12 +3,10 @@
 namespace starfall {
 
 StarfallApp::StarfallApp() {
-    addAssetDirectory("/Users/user/CLionProjects/cinder_0.9.2_mac/"
-                      "my_projects/final-project-skyien-z/resources/");
-
     current_color_ = ci::Color(0, 255, 0);
     current_trajectory_ = M_PI/4;
 }
+
 void StarfallApp::setup() {
     auto image = ci::loadImage( "/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
                                 "final-project-skyien-z/resources/mountains_for_starfall.png");

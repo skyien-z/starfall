@@ -42,7 +42,8 @@ void Simulation::Draw() const {
         return;
     }
 
-    glm::vec2 string_position (star_spawn_right_edge, canvas_.GetBottomEdge() + 50);
+    glm::vec2 string_position ((canvas_.GetRightEdge() -
+    canvas_.GetLeftEdge())/2,canvas_.GetBottomEdge() + 50);
 
     ci::gl::drawStringCentered(paragraph_lines_[frame_index_], string_position,
                                ci::ColorA(255, 255, 255, text_color_alpha_), ci::Font("Apple Chancery", 16));
@@ -67,7 +68,7 @@ void Simulation::Update() {
     if (isWholeSecond && current_second % kSecondsForFrameChange == 1) {
         frame_index_++;
         text_color_alpha_ = 0;
-        GenerateStarInBounds(GetRandomDownTrajectory());
+        GenerateStarInBounds(GetRandomRightAndDownTrajectory());
     } else {
         // creates text fading effect by decreasing text opacity as time goes on
         text_color_alpha_ += 0.05;

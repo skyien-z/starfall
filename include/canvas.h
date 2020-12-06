@@ -92,6 +92,8 @@ class Canvas: public Graphic {
 
     const std::vector<ShootingStar>& GetStarList();
 
+    const MapXToYList& GetBoundaryPoints() const;
+
     // Get the edges of the canvas
     float GetBottomEdge() const;
     float GetRightEdge() const;
@@ -110,7 +112,7 @@ class Canvas: public Graphic {
 
     // keys are x values of boundary points while the value is a vector
     // of y values that correspond to the x value key
-    std::unordered_map<int, std::vector<int>> boundary_points_;
+    MapXToYList boundary_points_;
 
     /**
      * Checks if given star has left the bounds of the canvas.

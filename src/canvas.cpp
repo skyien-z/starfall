@@ -98,6 +98,47 @@ const std::vector<ShootingStar> &Canvas::GetStarList() {
     return star_list_;
 }
 
+void Canvas::ExportBoundaryPointsToFile(const std::string &abs_file_path) {
+    std::ofstream output_stream(abs_file_path);
+    for (const auto& coordinate : boundary_points_) {
+        // coordinate.first is x value; coordinate.second is y value list
+        output_stream << coordinate.first << " ";
+        for (size_t i = 0; i < coordinate.second.size(); i++) {
+            output_stream << coordinate.second[i];
+            // Ensures that line doesn't end with a space
+            if (i != coordinate.second.size() - 1) {
+                output_stream << " ";
+            }
+        }
+        output_stream << "\n";
+    }
+    output_stream.close();
+}
+
+void Canvas::ImportBoundaryPointsFromFile(
+        const std::string &abs_file_path) {
+    std::ifstream text_stream (abs_file_path);
+
+    std::string line;
+    while (!text_stream.eof()) {
+        std::getline(text_stream, line);
+        std::stringstream one_line_stream(line);
+
+        int x_value;
+        // first value of each line is x value key
+        one_line_stream >> x_value;
+
+        int y_value;
+        std::vector<int> list_of_y_values;
+        while (!one_line_stream.eof()) {
+            one_line_stream >> y_value;
+            list_of_y_values.push_back(y_value);
+        }
+        boundary_points_.emplace(x_value, list_of_y_values);
+    }
+    text_stream.close();
+}
+
 float Canvas::GetBottomEdge() const {
     return bottom_edge_;
 }
@@ -110,16 +151,8 @@ float Canvas::GetLeftEdge() const {
     return left_edge_;
 }
 
-void Canvas::ExportBoundaryPointsToFile(const std::string &abs_file_path) {
-    std::ofstream output_stream(abs_file_path);
-    for (const auto& coordinate : boundary_points_) {
-        output_stream << coordinate.first << " ";
-        for (float y : coordinate.second) {
-            output_stream << y << " ";
-        }
-        output_stream << "\n";
-    }
-    output_stream.close();
+const MapXToYList &Canvas::GetBoundaryPoints() const {
+    return boundary_points_;
 }
 
 }

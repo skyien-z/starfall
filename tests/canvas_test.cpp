@@ -118,10 +118,25 @@ TEST_CASE("Exporting Boundary Data to File") {
     std::ifstream text_stream (absolute_file_path);
     std::string first_line;
     std::getline(text_stream, first_line);
-    REQUIRE(first_line == "60 90 ");
+    REQUIRE(first_line == "60 90");
 
     std::string second_line;
     std::getline(text_stream, second_line);
-    REQUIRE(second_line == "55 55 56 ");
+    REQUIRE(second_line == "55 55 56");
     text_stream.close();
+}
+
+TEST_CASE("Importing Boundary Data to File") {
+    std::string absolute_file_path = "/Users/user/CLionProjects/cinder_0.9.2_mac/"
+                                     "my_projects/final-project-skyien-z/"
+                                     "resources/test_boundary_exporting";
+    Canvas test_canvas(glm::vec2(50, 50),
+                       200, 200);
+    test_canvas.ImportBoundaryPointsFromFile(absolute_file_path);
+
+    std::vector<int> y1_list = {90};
+    REQUIRE(test_canvas.GetBoundaryPoints().at(60) == y1_list);
+
+    std::vector<int> y2_list = {55, 56};
+    REQUIRE(test_canvas.GetBoundaryPoints().at(55) == y2_list);
 }

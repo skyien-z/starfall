@@ -88,6 +88,14 @@ class Canvas: public Graphic {
      */
     void ExportBoundaryPointsToFile(const std::string& abs_file_path);
 
+    /**
+     * Imports boundary_points_ mapping data to from given file
+     * (from from file path) with the first value of each line as
+     * the x value key and the rest of the values as the y values
+     * that the x value maps to.
+     *
+     * @param abs_file_path; file path of file boundary data is written to
+     */
     void ImportBoundaryPointsFromFile(const std::string& abs_file_path);
 
     const std::vector<ShootingStar>& GetStarList();

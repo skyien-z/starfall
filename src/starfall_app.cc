@@ -67,6 +67,16 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
       current_color_ = GetRandomColor();
       current_trajectory_ = GetRandomTrajectory();
       break;
+  case ci::app::KeyEvent::KEY_UP:
+      canvas_.ImportBoundaryPointsFromFile(
+              "/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
+              "final-project-skyien-z/resources/mountain_boundaries");
+      break;
+  case ci::app::KeyEvent::KEY_DOWN:
+      canvas_.ExportBoundaryPointsToFile(
+              "/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
+              "final-project-skyien-z/resources/mountain_boundaries");
+      break;
   case ci::app::KeyEvent::KEY_RETURN:
       is_playing_simulation_ = true;
       simulation_.StartSimulation();

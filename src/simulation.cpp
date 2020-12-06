@@ -6,6 +6,9 @@ Simulation::Simulation(const Canvas &canvas) : canvas_(canvas) {
     ReadInParagraph("/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
                     "final-project-skyien-z/resources/starfall_paragraph");
 
+    canvas_.ImportBoundaryPointsFromFile("/Users/user/CLionProjects/"
+                             "cinder_0.9.2_mac/my_projects/final-project-skyien-z/"
+                             "resources/mountain_boundaries");
     // Calculate star spawning bounds
     star_spawn_left_edge = canvas_.GetLeftEdge();
     // Gets x value in middle of graph

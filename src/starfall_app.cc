@@ -84,10 +84,12 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
       simulation_.EndSimulation();
       break;
   case ci::app::KeyEvent::KEY_RIGHT:
-      current_trajectory_ = GetRandomRightTrajectory();
+      // Sets trajectory to a random float angle that goes right
+      current_trajectory_ = GetRandomFloat(5*M_PI/3, 7*M_PI/3);
       break;
   case ci::app::KeyEvent::KEY_LEFT:
-      current_trajectory_ = GetRandomLeftTrajectory();
+      // Sets trajectory to a random float angle that goes left
+      current_trajectory_ = GetRandomFloat(2*M_PI/3, 4*M_PI/3);
       break;
   }
 

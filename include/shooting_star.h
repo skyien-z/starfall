@@ -11,7 +11,7 @@ namespace starfall {
 /**
  * Creates and renders a single shooting star with its functionality
  */
-class ShootingStar: public Graphic {
+class ShootingStar : public Graphic {
   public:
     /**
      * Explicit constructor of shooting star

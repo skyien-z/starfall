@@ -21,26 +21,14 @@ int GetRandomInt(int lower_bound, int upper_bound) {
     return distribution(generator);
 }
 
-float GetRandomRightAndDownTrajectory() {
-    return GetRandomFloat(0, M_PI/3);
-}
-
-float GetRandomRightTrajectory() {
-    return GetRandomFloat(5*M_PI/3, 7*M_PI/3);
-}
-
-float GetRandomLeftTrajectory() {
-    return GetRandomFloat(2*M_PI/3, 4*M_PI/3);
-}
-
 float GetRandomTrajectory() {
-    switch (GetRandomInt(1, 2)) {
-        case 1:
-            return GetRandomRightTrajectory();
-        case 2:
-            return GetRandomLeftTrajectory();
+    if (GetRandomInt(1, 2) == 1) {
+        // Sets trajectory to a random float angle that goes right
+        return GetRandomFloat(5 * M_PI / 3, 7 * M_PI / 3);
+    } else {
+        // Sets trajectory to a random float angle that goes left
+        return GetRandomFloat(2*M_PI/3, 4*M_PI/3);
     }
-    return GetRandomLeftTrajectory();
 }
 
 ci::Color GetRandomColor() {

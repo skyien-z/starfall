@@ -9,7 +9,7 @@ namespace starfall {
  * Displays a simulation of shooting stars with a paragraph
  * description of starfall when given a canvas to "draw" on.
  */
-class Simulation: public Graphic{
+class Simulation : public Graphic {
 
   public:
     /**

@@ -9,7 +9,7 @@ typedef std::unordered_map<int, std::vector<int>> MapXToYList;
 /**
  * Creates canvas that handles rendering all shooting stars
  */
-class Canvas: public Graphic {
+class Canvas : public Graphic {
   public:
     /**
      * Default constructor for canvas.

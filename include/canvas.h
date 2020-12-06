@@ -78,6 +78,18 @@ class Canvas: public Graphic {
      */
     void RemoveBoundaries();
 
+    /**
+     * Exports boundary_points_ mapping data to given file
+     * (from from file path) with the first value of each line as
+     * the x value key and the rest of the values as the y values
+     * that the x value maps to.
+     *
+     * @param abs_file_path; file path of file boundary data is written to
+     */
+    void ExportBoundaryPointsToFile(const std::string& abs_file_path);
+
+    void ImportBoundaryPointsFromFile(const std::string& abs_file_path);
+
     const std::vector<ShootingStar>& GetStarList();
 
     // Get the edges of the canvas

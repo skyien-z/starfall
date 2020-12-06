@@ -14,7 +14,7 @@ Simulation::Simulation(const Canvas &canvas) : canvas_(canvas) {
     star_spawn_top_edge = canvas_.GetBottomEdge() + 60;
 }
 
-void Simulation::ReadInParagraph(std::string absolute_file_path) {
+void Simulation::ReadInParagraph(const std::string &absolute_file_path) {
     std::ifstream text_stream (absolute_file_path);
 
     std::string next_line;

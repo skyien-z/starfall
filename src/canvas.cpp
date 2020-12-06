@@ -110,4 +110,16 @@ float Canvas::GetLeftEdge() const {
     return left_edge_;
 }
 
+void Canvas::ExportBoundaryPointsToFile(const std::string &abs_file_path) {
+    std::ofstream output_stream(abs_file_path);
+    for (const auto& coordinate : boundary_points_) {
+        output_stream << coordinate.first << " ";
+        for (float y : coordinate.second) {
+            output_stream << y << " ";
+        }
+        output_stream << "\n";
+    }
+    output_stream.close();
+}
+
 }

@@ -83,7 +83,7 @@ private:
      *
      * @param absolute_file_path
      */
-    void ReadInParagraph(std::string absolute_file_path);
+    void ReadInParagraph(const std::string &absolute_file_path);
 
     /**
      * Adds a random star to the canvas object held by simulation.

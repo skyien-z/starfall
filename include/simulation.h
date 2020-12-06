@@ -12,6 +12,11 @@ namespace starfall {
 class Simulation: public Graphic{
 
   public:
+    /**
+     * Explicit constructor of simulation that accepts
+     * a canvas object
+     * @param canvas on which to draw simulation
+     */
     Simulation(const Canvas& canvas);
 
     Simulation() = default;
@@ -60,6 +65,7 @@ private:
     static constexpr size_t kBeginningFrame = 0;
     static constexpr size_t kSecondsForFrameChange = 2;
 
+    // bounds used to generate star starting position
     float star_spawn_left_edge;
     float star_spawn_right_edge;
     float star_spawn_top_edge;

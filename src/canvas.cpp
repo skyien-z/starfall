@@ -98,10 +98,6 @@ const std::vector<ShootingStar> &Canvas::GetStarList() {
     return star_list_;
 }
 
-float Canvas::GetTopEdge() const {
-    return top_edge_;
-}
-
 float Canvas::GetBottomEdge() const {
     return bottom_edge_;
 }

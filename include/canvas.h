@@ -81,7 +81,6 @@ class Canvas: public Graphic {
     const std::vector<ShootingStar>& GetStarList();
 
     // Get the edges of the canvas
-    float GetTopEdge() const;
     float GetBottomEdge() const;
     float GetRightEdge() const;
     float GetLeftEdge() const;

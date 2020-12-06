@@ -2,7 +2,7 @@
 
 namespace starfall {
 
-Simulation::Simulation(const Canvas &canvas) : canvas_(canvas) {
+Simulation::Simulation(Canvas canvas) : canvas_(canvas) {
     ReadInParagraph("/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
                     "final-project-skyien-z/resources/starfall_paragraph");
 

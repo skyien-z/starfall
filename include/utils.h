@@ -22,7 +22,6 @@ namespace starfall {
      */
     float GetRandomTrajectory();
 
-
     /**
      * Generate random color based on randomly chosen rgb values
      * @return color as ColorA

@@ -17,7 +17,7 @@ class Simulation : public Graphic {
      * a canvas object
      * @param canvas on which to draw simulation
      */
-    Simulation(const Canvas& canvas);
+    Simulation(Canvas canvas);
 
     Simulation() = default;
 

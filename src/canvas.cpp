@@ -2,51 +2,51 @@
 
 namespace starfall {
 
-    Canvas::Canvas(const glm::vec2 &top_left_corner, size_t canvas_width, size_t canvas_height) {
-        bottom_edge_ = top_left_corner.y;
-        top_edge_ = top_edge_ + canvas_height;
+Canvas::Canvas(const glm::vec2 &top_left_corner, size_t canvas_width, size_t canvas_height) {
+    bottom_edge_ = top_left_corner.y;
+    top_edge_ = top_edge_ + canvas_height;
 
-        left_edge_ = top_left_corner.x;
-        right_edge_ = left_edge_ + canvas_width;
+    left_edge_ = top_left_corner.x;
+    right_edge_ = left_edge_ + canvas_width;
+}
+
+void Canvas::Draw() const {
+    for (const auto &star: star_list_) {
+        star.Draw();
     }
+}
 
-    void Canvas::Draw() const {
-        for (const auto &star: star_list_) {
-            star.Draw();
-        }
-    }
-
-    void Canvas::Update() {
-        for (size_t i = 0; i < star_list_.size(); i++) {
-            // Shortens star if star touches boundary and deletes star
-            // when star is hidden from view
-            if (star_list_[i].HasDisappeared() ||
-            IsStarOutOfBounds(star_list_[i])) {
-                auto star_to_remove_it = star_list_.begin() + i;
-                if (star_to_remove_it != star_list_.end()) {
-                    star_list_.erase(star_to_remove_it);
-                    break;
-                }
-            } else if (IsStarDisappearingBehindBoundary(star_list_[i])) {
-                star_list_[i].DisappearProgressively();
+void Canvas::Update() {
+    for (size_t i = 0; i < star_list_.size(); i++) {
+        // Shortens star if star touches boundary and deletes star
+        // when star is hidden from view
+        if (star_list_[i].HasDisappeared() ||
+        IsStarOutOfBounds(star_list_[i])) {
+            auto star_to_remove_it = star_list_.begin() + i;
+            if (star_to_remove_it != star_list_.end()) {
+                star_list_.erase(star_to_remove_it);
+                break;
             }
-            // Will not change star position if star touches boundaries
-            star_list_[i].Update();
+        } else if (IsStarDisappearingBehindBoundary(star_list_[i])) {
+            star_list_[i].DisappearProgressively();
         }
+        // Will not change star position if star touches boundaries
+        star_list_[i].Update();
     }
+}
 
-    void Canvas::AddPointToBoundaries(const glm::vec2 &boundary_point) {
-        //boundary_points_.push_back(boundary_point);
+void Canvas::AddPointToBoundaries(const glm::vec2 &boundary_point) {
+    //boundary_points_.push_back(boundary_point);
 
-        // if x value key doesn't exist, [] creates key and adds y value to
-        // vector of y values. If key exists, just add y value to y value list.
-        boundary_points_[boundary_point.x].push_back(boundary_point.y);
+    // if x value key doesn't exist, [] creates key and adds y value to
+    // vector of y values. If key exists, just add y value to y value list.
+    boundary_points_[boundary_point.x].push_back(boundary_point.y);
 
-    }
+}
 
-    void Canvas::RemoveBoundaries() {
-        boundary_points_.clear();
-    }
+void Canvas::RemoveBoundaries() {
+    boundary_points_.clear();
+}
 
 bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
     // variable set to true the first time DisappearProgressively() is called

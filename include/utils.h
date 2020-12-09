@@ -2,8 +2,10 @@
 
 #include <cinder/Color.h>
 
+/**
+ * Utility file that generates random trajectories, colors, and positions.
+ */
 namespace starfall {
-
     /**
      * Generates and returns random float from [lower_bound, upper_bound).
      */

@@ -16,7 +16,7 @@ int GetRandomInt(int lower_bound, int upper_bound) {
     std::random_device rd;
     std::mt19937 generator(rd());
 
-    // upper_bound + 1 makes the distribution inclusive to the bounds
+    // upper_bound + 1 makes the distribution inclusive to the bounds passed in
     std::uniform_int_distribution<> distribution(lower_bound, upper_bound + 1);
     return distribution(generator);
 }

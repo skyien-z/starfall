@@ -1,12 +1,11 @@
 #pragma once
 
-#include <cinder/Timer.h>
 #include "cinder/gl/gl.h"
 #include "graphic.h"
 
 namespace starfall {
 
-    constexpr size_t kStarRadius_ = 2;
+  constexpr size_t kStarRadius_ = 2;
 
 /**
  * Creates and renders a single shooting star with its functionality
@@ -60,7 +59,7 @@ class ShootingStar : public Graphic {
 
     /**
      * Removes star at the last position from past positions list,
-     * sets is_disappearing to true, which stops the star from
+     * sets is_disappearing_ to true, which stops the star from
      * updating its position, drawing its head, or checking its boundaries.
      */
     void DisappearProgressively();
@@ -74,11 +73,11 @@ class ShootingStar : public Graphic {
     bool HasDisappeared() const;
 
     /**
-     * Returns when is_disappearing is true, which is when last star
+     * Returns when is_disappearing_ is true, which is when last star
      * that makes up star tail leaves an edge of the canvas (this
      * functionality is handled by the canvas class)
      *
-     * @return bool is_disappearing
+     * @return bool is_disappearing_
      */
     bool IsDisappearing() const;
 
@@ -86,15 +85,16 @@ class ShootingStar : public Graphic {
 
  private:
     static constexpr size_t kMoveByXPixels = 2;
+
+    // Alpha value of the last tail star's color
     static constexpr float kLastTailStarAlpha = 0.25;
 
-    // Star tail length in pixels is
-    // (kStarRadius_/2) * kTailLengthProportion_
+    // Number of "stars" that aggregate to make up star tail
     static constexpr int kTailLengthProportion_ = 15;
 
     // variables that change as app updates
     glm::vec2 position_;
-    bool is_disappearing;
+    bool is_disappearing_;
 
     // variables that are never changed once
     // star is initialized
@@ -110,13 +110,13 @@ class ShootingStar : public Graphic {
      * initialized color.
      *
      * @param star_position pixel position representing where to draw star.
-     * @param is_head_star; true if star to be rendered is the "head" star
      */
     void DrawStarHead(glm::vec2 star_position) const;
 
     /**
      * Draws "stars" that aggregate into colored star tail;
-     * tail stars appears to gradually fade
+     * tail stars appears to gradually fade through decreasing
+     * the alpha values of each aggregate "star."
      */
     void DrawStarTail() const;
 
@@ -128,4 +128,4 @@ class ShootingStar : public Graphic {
      */
     void UpdatePosition();
 };
-}
+} // namespace starfall

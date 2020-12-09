@@ -11,12 +11,12 @@ ShootingStar::ShootingStar(const glm::vec2& starting_position,
 
     // Each star only shoots once so adds first position to past_positions_
     past_positions_.push_back(starting_position);
-    is_disappearing = false;
+    is_disappearing_ = false;
 }
 
 void ShootingStar::Update() {
-    // past_positions_ will only be empty if star is not needed anymore
-    if (is_disappearing) {
+    // is_disappearing_ is true if star is not needed anymore
+    if (is_disappearing_) {
         return;
     }
     UpdatePosition();
@@ -57,7 +57,7 @@ void ShootingStar::Draw() const {
     DrawStarTail();
 
     // Draws current star head if star is above mountains
-    if (!is_disappearing) {
+    if (!is_disappearing_) {
         DrawStarHead(position_);
     }
 }
@@ -88,12 +88,14 @@ bool ShootingStar::DoesStarTouchPoint(float x_value, float y_value) const {
     float distance_between_points = sqrt(pow(position_.x - x_value, 2) +
                                          pow(position_.y - y_value, 2));
 
+    // if distance between star head center and point given is less than
+    // the star radius, the star touches the point given
     return distance_between_points <= kStarRadius_;
 }
 
 bool ShootingStar::DoesStarTailHaveCoordinateValue(float coordinate_value,
                                                    bool is_x_coordinate) const {
-    // Position of the last "star" that makes up the star tail
+    // Position of the visually last "star" that makes up the star tail
     glm::vec2 star_tail_position = past_positions_.front();
 
     if (is_x_coordinate) {
@@ -104,7 +106,7 @@ bool ShootingStar::DoesStarTailHaveCoordinateValue(float coordinate_value,
 }
 
 void ShootingStar::DisappearProgressively() {
-    is_disappearing = true;
+    is_disappearing_ = true;
     past_positions_.erase(past_positions_.begin());
 }
 
@@ -117,8 +119,7 @@ bool ShootingStar::HasDisappeared() const{
 }
 
 bool ShootingStar::IsDisappearing() const {
-    return is_disappearing;
+    return is_disappearing_;
 }
-
-}
+} // namespace starfall
 

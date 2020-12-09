@@ -7,7 +7,6 @@ namespace starfall {
  * drawn in cinder inherit.
  */
 class Graphic {
-
   public:
     /**
      * Renders a graphic element in Cinder.
@@ -23,5 +22,4 @@ class Graphic {
 
     virtual ~Graphic(void) = default;
 };
-
 } // namespace starfall

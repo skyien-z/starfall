@@ -128,4 +128,5 @@ class ShootingStar : public Graphic {
      */
     void UpdatePosition();
 };
+
 } // namespace starfall

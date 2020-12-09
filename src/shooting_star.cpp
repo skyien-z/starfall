@@ -121,5 +121,6 @@ bool ShootingStar::HasDisappeared() const{
 bool ShootingStar::IsDisappearing() const {
     return is_disappearing_;
 }
+
 } // namespace starfall
 

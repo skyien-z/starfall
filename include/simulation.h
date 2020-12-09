@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cinder/Timer.h>
 #include "canvas.h"
 #include "utils.h"
 
@@ -10,11 +11,11 @@ namespace starfall {
  * description of starfall when given a canvas to "draw" on.
  */
 class Simulation : public Graphic {
-
   public:
     /**
      * Explicit constructor of simulation that accepts
-     * a canvas object
+     * a canvas object.
+     *
      * @param canvas on which to draw simulation
      */
     Simulation(Canvas canvas);
@@ -23,7 +24,7 @@ class Simulation : public Graphic {
 
     /**
      * Draws paragraph lines and simulation canvas when
-     * simulation plays
+     * simulation plays.
      */
     void Draw() const;
 
@@ -46,7 +47,7 @@ class Simulation : public Graphic {
     void EndSimulation();
 
     /**
-     * Returns whether the simulation is in progress
+     * Returns whether the simulation is in progress.
      *
      * @return true if simulation is playing, false otherwise
      */
@@ -91,5 +92,6 @@ private:
      */
     void GenerateStarInBounds(float trajectory);
 };
+
 } // namespace starfall
 

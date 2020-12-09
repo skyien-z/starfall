@@ -46,7 +46,8 @@ void Simulation::Draw() const {
     canvas_.GetLeftEdge())/2,canvas_.GetBottomEdge() + 50);
 
     ci::gl::drawStringCentered(paragraph_lines_[frame_index_], string_position,
-                               ci::ColorA(255, 255, 255, text_color_alpha_), ci::Font("Apple Chancery", 16));
+     ci::ColorA(255, 255, 255, text_color_alpha_),
+     ci::Font("Apple Chancery", 16));
 
     canvas_.Draw();
 }
@@ -60,6 +61,7 @@ void Simulation::Update() {
         EndSimulation();
         return;
     }
+
     int current_second = floor(timer_.getSeconds());
     bool isWholeSecond = timer_.getSeconds() - current_second <= 0.01;
 
@@ -67,12 +69,12 @@ void Simulation::Update() {
     // run every 2 seconds (value of kSecondsForFrameChange)
     if (isWholeSecond && current_second % kSecondsForFrameChange == 1) {
         frame_index_++;
-        text_color_alpha_ = 0;
+        text_color_alpha_ = 0; // new text line starts transparent to fade in
 
         // Generates a star with trajectory going right and down
         GenerateStarInBounds(GetRandomFloat(0, M_PI/3));
     } else {
-        // creates text fading effect by decreasing text opacity as time goes on
+        // creates text fading in effect by increasing text opacity as time goes on
         text_color_alpha_ += 0.05;
     }
     // Ensures that a star is released every second (runs the second

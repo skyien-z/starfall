@@ -40,4 +40,5 @@ glm::vec2 GetRandomStartingPosition(float left_edge, float right_edge,
     return glm::vec2(GetRandomInt(left_edge, right_edge),
                      GetRandomInt(bottom_edge, top_edge));
 }
+
 } // namespace starfall

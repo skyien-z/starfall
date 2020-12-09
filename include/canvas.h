@@ -131,4 +131,5 @@ class Canvas : public Graphic {
      */
     bool IsStarOutOfBounds(const ShootingStar& star) const;
 };
+
 } // namespace starfall

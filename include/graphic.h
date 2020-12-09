@@ -22,4 +22,5 @@ class Graphic {
 
     virtual ~Graphic(void) = default;
 };
+
 } // namespace starfall

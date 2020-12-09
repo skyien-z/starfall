@@ -25,7 +25,7 @@ void Canvas::Update() {
             auto star_to_remove_it = star_list_.begin() + i;
             if (star_to_remove_it != star_list_.end()) {
                 star_list_.erase(star_to_remove_it);
-                break;
+                continue;
             }
         } else if (IsStarDisappearingBehindBoundary(star_list_[i])) {
             star_list_[i].DisappearProgressively();
@@ -36,8 +36,6 @@ void Canvas::Update() {
 }
 
 void Canvas::AddPointToBoundaries(const glm::vec2 &boundary_point) {
-    //boundary_points_.push_back(boundary_point);
-
     // if x value key doesn't exist, [] creates key and adds y value to
     // vector of y values. If key exists, just add y value to y value list.
     boundary_points_[boundary_point.x].push_back(boundary_point.y);
@@ -49,7 +47,7 @@ void Canvas::RemoveBoundaries() {
 }
 
 bool Canvas::IsStarDisappearingBehindBoundary(const ShootingStar &star) {
-    // variable set to true the first time DisappearProgressively() is called
+    // if condition is true the first time DisappearProgressively() is called
     if (star.IsDisappearing()) {
         return true;
     }
@@ -155,4 +153,4 @@ const MapXToYList &Canvas::GetBoundaryPoints() const {
     return boundary_points_;
 }
 
-}
+} // namespace starfall

@@ -7,7 +7,7 @@ namespace starfall {
 typedef std::unordered_map<int, std::vector<int>> MapXToYList;
 
 /**
- * Creates canvas that handles rendering all shooting stars
+ * Creates canvas that handles rendering all shooting stars.
  */
 class Canvas : public Graphic {
   public:
@@ -33,14 +33,14 @@ class Canvas : public Graphic {
     /**
      * Updates state of all shooting stars in canvas. Checks if star
      * touches boundary and shortens it accordingly, and deletes star
-     * when star is hidden from view
+     * when star is hidden from view or leaves screen.
      */
     void Update();
 
     /**
      * Adds point to boundary points map with the x coordinate
      * of the boundary point passed in as the key and the y coordinate
-     * as a value of the int list referenced to by the key––this way,
+     * as a value of the int list referenced to by the x key––this way,
      * the unordered map can contain multiple y values per x value.
      *
      * @param boundary_point vec2 point to add to list
@@ -48,9 +48,9 @@ class Canvas : public Graphic {
     void AddPointToBoundaries(const glm::vec2 &boundary_point);
 
     /**
-     * Adds a star to the star list.
+     * Adds a star to the star map.
      *
-     * @param star to add to list
+     * @param star to add to map
      */
     void AddStarToList(const ShootingStar& star);
 
@@ -82,7 +82,7 @@ class Canvas : public Graphic {
      * Exports boundary_points_ mapping data to given file
      * (from from file path) with the first value of each line as
      * the x value key and the rest of the values as the y values
-     * that the x value maps to.
+     * that the x value maps to; all values are separated by spaces.
      *
      * @param abs_file_path; file path of file boundary data is written to
      */
@@ -102,7 +102,7 @@ class Canvas : public Graphic {
 
     const MapXToYList& GetBoundaryPoints() const;
 
-    // Get the edges of the canvas
+    // Get some edges of the canvas
     float GetBottomEdge() const;
     float GetRightEdge() const;
     float GetLeftEdge() const;
@@ -131,4 +131,5 @@ class Canvas : public Graphic {
      */
     bool IsStarOutOfBounds(const ShootingStar& star) const;
 };
-}
+
+} // namespace starfall

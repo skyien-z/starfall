@@ -1,7 +1,13 @@
 #pragma once
 
 namespace starfall {
+
+/**
+ * Abstract class from which elements that need to be
+ * drawn in cinder inherit.
+ */
 class Graphic {
+
   public:
     /**
      * Renders a graphic element in Cinder.
@@ -16,8 +22,6 @@ class Graphic {
     virtual void Update() = 0;
 
     virtual ~Graphic(void) = default;
-
-  protected:
-
 };
-}
+
+} // namespace starfall

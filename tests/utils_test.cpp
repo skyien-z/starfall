@@ -4,6 +4,9 @@
 
 using namespace starfall;
 
+// All other util functions primarly return
+// these function calls
+
 TEST_CASE("Test Get Random Float") {
     float previous_float = 1.0f;
 

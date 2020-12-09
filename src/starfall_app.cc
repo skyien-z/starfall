@@ -8,14 +8,18 @@ StarfallApp::StarfallApp() {
 }
 
 void StarfallApp::setup() {
-    auto image = ci::loadImage( "/Users/user/CLionProjects/cinder_0.9.2_mac/my_projects/"
-                                "final-project-skyien-z/resources/mountains_for_starfall.png");
+    // loads and adds mountains image to app
+    auto image = ci::loadImage( "/Users/user/CLionProjects/cinder_0.9.2_mac/"
+                                "my_projects/final-project-skyien-z/resources/"
+                                "mountains_for_starfall.png");
     background_image_ = ci::gl::Texture2d::create(image);
     setWindowSize(background_image_->getWidth(),
                   background_image_->getHeight());
 
     // Conform canvas size to image specifications
     canvas_ = Canvas(glm::vec2(0, 0), getWindowWidth(),getWindowHeight());
+
+    // Generate simulation with copy of canvas_
     simulation_ = Simulation(canvas_);
 }
 
@@ -23,7 +27,7 @@ void StarfallApp::draw() {
     ci::gl::draw(background_image_);
 
     if (is_playing_simulation_) {
-        // the canvas is drawn in the simulation
+        // simulation draws on its own canvas
         simulation_.Draw();
     } else {
         canvas_.Draw();
@@ -31,9 +35,9 @@ void StarfallApp::draw() {
 }
 
 void StarfallApp::update() {
-    // if simulation is over, will update bool is_playing_simulation_ to false
+    // if simulation is over, this update bool is_playing_simulation_ to false
     if (is_playing_simulation_) {
-        simulation_.Update();
+        simulation_.Update(); // simulation updates its own canvas
         is_playing_simulation_ = simulation_.IsPlayingSimulation();
     } else {
         canvas_.Update();
@@ -95,4 +99,4 @@ void StarfallApp::keyDown(ci::app::KeyEvent event) {
 
 }
 
-}  // namespace ideal_gas
+}  // namespace starfall

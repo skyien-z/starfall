@@ -8,8 +8,6 @@ using namespace starfall;
 const int kMoveByX = 2;
 
 TEST_CASE("Does Star Touch Point") {
-    // radius of all stars is 2
-
     ShootingStar star(glm::vec2(50, 50),
                       ci::Color(0, 255, 0), M_PI / 4);
 

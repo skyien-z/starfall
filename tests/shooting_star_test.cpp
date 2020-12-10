@@ -94,3 +94,10 @@ TEST_CASE("Star Disappear Progressively") {
         REQUIRE(star.HasDisappeared());
     }
 }
+
+TEST_CASE("Does Star Tail Have Coordinate Value") {
+    ShootingStar star(glm::vec2(50, 50),
+                      ci::Color(0, 255, 0), M_PI / 4);
+    REQUIRE(star.DoesStarTailHaveCoordinateValue(50, true));
+}
+

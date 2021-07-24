@@ -1,5 +1,7 @@
 **Starfall App**
 
+![alt text](https://github.com/skyien-z/starfall/blob/main/example.png)
+
 **Description**
 This program is a cinder application that displays a simulation of shooting stars,
 based on Sarah J. Maas' description of a fictional "Starfall" in her book *A Court 

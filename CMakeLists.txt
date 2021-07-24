@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 set(CMAKE_CXX_STANDARD 11)
-project(ideal-gas)
+project(starfall)
 
 # This tells the compiler to not aggressively optimize and
 # to include debugging information so that the debugger
@@ -54,19 +54,23 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
                             src/starfall_app.cc
                             src/shooting_star.cpp
                             src/canvas.cpp
-                            src/background.cpp)
+                            src/utils.cpp
+                            src/simulation.cpp)
 
-list(APPEND TEST_FILES tests/shooting_star_test.cpp)
+list(APPEND TEST_FILES tests/shooting_star_test.cpp
+                        tests/canvas_test.cpp
+                        tests/utils_test.cpp
+                        tests/simulation_test.cpp)
 
 ci_make_app(
-        APP_NAME        ideal-gas
+        APP_NAME        starfall
         CINDER_PATH     ${CINDER_PATH}
         SOURCES         apps/cinder_app_main.cc ${SOURCE_FILES}
         INCLUDES        include
 )
 
 ci_make_app(
-        APP_NAME        ideal-gas-test
+        APP_NAME        starfall-test
         CINDER_PATH     ${CINDER_PATH}
         SOURCES         tests/test_main.cc ${SOURCE_FILES} ${TEST_FILES}
         INCLUDES        include
@@ -75,8 +79,8 @@ ci_make_app(
 
 find_package(Boost 1.40 COMPONENTS program_options REQUIRED)
 
-target_link_libraries(ideal-gas Boost::program_options)
+target_link_libraries(starfall Boost::program_options)
 
 if(MSVC)
-    set_property(TARGET ideal-gas-test APPEND_STRING PROPERTY LINK_FLAGS " /SUBSYSTEM:CONSOLE")
+    set_property(TARGET starfall-test APPEND_STRING PROPERTY LINK_FLAGS " /SUBSYSTEM:CONSOLE")
 endif()

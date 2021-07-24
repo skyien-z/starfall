@@ -46,10 +46,7 @@ Week 1:
     to draw background (should have mountains in the distance for the foreground)
 * Render a single shooting star on Cinder
     1. Star must follow linear trajectory (equation variables can be hard coded in for this week)
-    2. Star must have a "head" that is a very bright color and be surrounded by a darker hue
-    of that same color
-    3. Once the head passes a place, a bright streak of color must be left behind to 
-    gradually darken and fade by a timer in order to create a comet effect
+2. Star must have a white "head" followed by a very bright colored tail that fades into a dark gradient of that same color
     4. Stars must not enter foreground and must disappear behind mountains
 
 Week 2:
@@ -58,26 +55,21 @@ Week 2:
     2. Allow user to click on night image to create a new shooting star where clicked
     3. Allow user to set color of shooting star
     4. Allow users to create any number of shootings stars in background
-* Add background music to app
 
 Week 3: 
 * Create action that "pre-loads" a random color and random slope for a shooting
  star that user can click to release
-* Enable star color blending if stars or their tails overlap
 * Add Starfall Scene Paragraph
     1. Sentences of the paragraph excerpted should fade in and out by a timer
-
-#####Stretch Goals
 * Create a complete automatic animation of Starfall
     1. Automatic animation should follow description of shooting stars in excerpt
     2. User can choose to play this pre-loaded animation or create their own stars
-    
-      
-* Release stars based on audio input (Very Distant Goal)
+
+#####Stretch Goals
+* Release stars based on audio input (Distant Goal)
     1. A faster song will release more stars than a slow song
     2. A major key will release warm-colored stars
     3. A minor key will release cool-colored stars
 
-
-* Release stars based on MIDI input (Very Very Distant Goal)
+* Release stars based on MIDI input (Very Distant Goal)
     1. Release stars based on real-time audio input from a MIDI device
